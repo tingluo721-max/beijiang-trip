@@ -140,28 +140,35 @@
   <!-- ═══════════ SHARED: 机票行情 ═══════════ -->
   <div class="card full" style="margin-bottom:24px">
     <h3>✈️ 实时机票行情（共用）</h3>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:16px">
       <div class="price-row" style="flex-direction:column;align-items:flex-start">
-        <div class="route">北京 → 伊宁 (YIN)</div>
+        <div class="route">北京 → 伊宁 🥇</div>
         <div style="font-size:12px;color:var(--muted)">南航CZ/国航CA 直飞 5h</div>
         <div class="price near" style="margin-top:8px">¥1,000-1,100</div>
         <span class="tag near">⚠️ 差¥150-250</span>
       </div>
       <div class="price-row" style="flex-direction:column;align-items:flex-start">
+        <div class="route">北京 → 乌鲁木齐 🥈</div>
+        <div style="font-size:12px;color:var(--muted)">每日20+班 4h · 竞争最激烈</div>
+        <div class="price near" style="margin-top:8px">待查</div>
+        <span class="tag near">🆕 新追踪</span>
+      </div>
+      <div class="price-row" style="flex-direction:column;align-items:flex-start">
         <div class="route">乌鲁木齐 → 北京</div>
-        <div style="font-size:12px;color:var(--muted)">每日10+班 3.5-4h</div>
+        <div style="font-size:12px;color:var(--muted)">每日10+班 返程</div>
         <div class="price good" style="margin-top:8px">¥750-1,000</div>
         <span class="tag good">🟢 已达标</span>
       </div>
       <div class="price-row" style="flex-direction:column;align-items:flex-start">
-        <div class="route">北京 → 阿勒泰 (AAT)</div>
+        <div class="route">北京 → 阿勒泰</div>
         <div style="font-size:12px;color:var(--muted)">备选 · 旺季偏贵</div>
         <div class="price high" style="margin-top:8px">¥1,900-2,100</div>
         <span class="tag high">❌ 放弃</span>
       </div>
     </div>
     <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);font-size:13px">
-      🎯 目标价 ≤¥850/成人 | 🔑 7/8海航 · <span style="color:#c53030">7/15国航</span> · 7/18东航 · <span style="color:#c53030">7/28南航</span>
+      🎯 目标价 ≤¥850/成人 | 🥇 伊宁进=当前行程 | 🥈 乌市进=改路线或乌市→伊宁转机<br>
+      💡 <strong>如果北京→乌市超级便宜：</strong>方案A：乌市✈️伊宁（1h·¥300-500）接原路线 | 方案B：乌市往返新路线（需重排）
     </div>
   </div>
 
@@ -328,6 +335,34 @@
     </div>
   </div>
 
+  <!-- ═══════════ SHARED: 路线方案对比 ═══════════ -->
+  <div class="card full" style="margin-bottom:24px">
+    <h3>🛣️ 路线方案对比（根据机票决定）</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div style="background:#f0f7ff;border-radius:10px;padding:16px;border:2px solid var(--blue)">
+        <div style="font-weight:700;font-size:15px;color:var(--blue);margin-bottom:8px">🥇 方案A：伊宁进·乌市出</div>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:8px">当前行程 · 开口程最优解</div>
+        <table style="font-size:12px">
+          <tr><td>去程</td><td><strong>北京→伊宁</strong></td><td>南航/国航直飞</td></tr>
+          <tr><td>返程</td><td><strong>乌市→北京</strong></td><td>航班密集</td></tr>
+          <tr><td>路线</td><td colspan="2">伊宁→赛湖→喀拉峻→那拉提→独库→魔鬼城→喀纳斯→禾木→乌市</td></tr>
+          <tr><td>优势</td><td colspan="2">✅ 顺路·不回头·驾驶量均匀</td></tr>
+        </table>
+      </div>
+      <div style="background:#fffdf0;border-radius:10px;padding:16px;border:2px solid var(--yellow)">
+        <div style="font-weight:700;font-size:15px;color:var(--yellow);margin-bottom:8px">🥈 方案B：乌市进·伊宁出</div>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:8px">如果北京→乌市便宜很多</div>
+        <table style="font-size:12px">
+          <tr><td>去程</td><td><strong>北京→乌市</strong></td><td>航班最多最便宜</td></tr>
+          <tr><td>返程</td><td><strong>伊宁→北京</strong></td><td>南航/国航直飞</td></tr>
+          <tr><td>路线</td><td colspan="2">乌市→沙漠公路→喀纳斯→禾木→魔鬼城→独库→那拉提→喀拉峻→赛湖→伊宁（反向走）</td></tr>
+          <tr><td>优势</td><td colspan="2">✅ 去程省¥200-500/人 · 同样不走回头路</td></tr>
+          <tr><td>⚠️</td><td colspan="2">D2驾驶500km偏长·需微调</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
   <!-- ═══════════ SHARED: 日期组合矩阵 ═══════════ -->
   <div class="card full" style="margin-bottom:24px">
     <h3>📐 可选日期组合 · 9组</h3>
@@ -357,6 +392,7 @@
         <tr><td>07/03 13:07</td><td>乌鲁木齐→北京</td><td>¥750-1,000</td><td><span class="tag good">🟢 已达标</span></td><td>每日10+班，竞争激烈</td></tr>
         <tr><td>07/03 13:07</td><td>北京→阿勒泰</td><td>¥1,900-2,100</td><td><span class="tag high">❌ 放弃</span></td><td>旺季比伊宁更贵</td></tr>
         <tr><td>2026-07-03 15:21</td><td>v2.0 双家庭版上线·单/双家庭Tab切换</td></tr>
+    <tr><td>2026-07-03 15:24</td><td>v2.1 新增北京→乌市航线追踪 + 路线方案AB对比</td></tr>
     <!-- LOG_INSERT -->
       </tbody>
     </table>
