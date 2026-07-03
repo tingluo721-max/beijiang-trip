@@ -2,330 +2,291 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>🏔️ 北疆自驾游 · 蹲票仪表板</title>
 <style>
-  :root { --bg:#f0f4f8;--card:#fff;--text:#2d3748;--muted:#718096;--blue:#2b6cb0;--green:#276749;--red:#c53030;--yellow:#b7791f;--border:#e2e8f0;--tag-green:#c6f6d5;--tag-red:#fed7d7;--tag-yellow:#feebc8; }
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;padding:20px}
-  .container{max-width:1340px;margin:0 auto}
-  .header{background:linear-gradient(135deg,#1a365d,#2b6cb0);color:#fff;padding:24px 32px;border-radius:16px;margin-bottom:24px;display:flex;justify-content:space-between;align-items:center}
-  .header h1{font-size:24px}.header .sub{opacity:.85;font-size:14px;margin-top:4px}
-  .live-badge{background:#48bb78;padding:6px 14px;border-radius:20px;font-size:13px;font-weight:600;animation:pulse 2s infinite}
-  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
-  .master-tabs{display:flex;gap:8px;margin-bottom:16px}
-  .master-tab{flex:1;padding:14px 20px;border-radius:12px;border:2px solid var(--border);background:#fff;cursor:pointer;text-align:center;transition:all .2s}
-  .master-tab:hover{border-color:var(--blue)}.master-tab.active{background:var(--blue);color:#fff;border-color:var(--blue)}
-  .master-tab .title{font-size:16px;font-weight:700}.master-tab .detail{font-size:12px;opacity:.7;margin-top:3px}
-  .route-tabs{display:flex;gap:6px;margin-bottom:16px}
-  .route-tab{flex:1;padding:10px 16px;border-radius:8px;border:1.5px solid var(--border);background:#fff;cursor:pointer;font-size:13px;font-weight:600;text-align:center;transition:all .15s}
-  .route-tab.a.active{background:#1a365d;color:#fff;border-color:#1a365d}
-  .route-tab.b.active{background:#b7791f;color:#fff;border-color:#b7791f}
-  .tab-content,.route-content{display:none}
-  .tab-content.active,.route-content.active{display:block}
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px}
-  .card{background:var(--card);border-radius:12px;padding:20px 24px;box-shadow:0 1px 3px rgba(0,0,0,.06);border:1px solid var(--border)}
-  .card h3{font-size:16px;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--border)}
-  .full{grid-column:1/-1}
-  .price-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)}
-  .price-row:last-child{border:none}.route{font-weight:600}.price{font-size:20px;font-weight:700}
-  .price.good{color:var(--green)}.price.near{color:var(--yellow)}.price.high{color:var(--red)}
-  .tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600}
-  .tag.good{background:var(--tag-green);color:var(--green)}.tag.near{background:var(--tag-yellow);color:var(--yellow)}.tag.high{background:var(--tag-red);color:var(--red)}
-  .timeline{position:relative;padding-left:24px}.timeline::before{content:'';position:absolute;left:8px;top:4px;bottom:4px;width:2px;background:var(--border)}
-  .tl-item{position:relative;margin-bottom:12px;padding-left:12px}.tl-item::before{content:'';position:absolute;left:-20px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--blue)}
-  .tl-item.done::before{background:var(--green)}.tl-item.next::before{background:var(--red);animation:pulse 2s infinite}
-  .tl-date{font-size:12px;color:var(--muted)}.tl-text{font-size:14px}
-  table{width:100%;border-collapse:collapse;font-size:13px}th{background:#edf2f7;padding:8px 6px;text-align:left;font-weight:600;font-size:11px}
-  td{padding:7px 6px;border-bottom:1px solid var(--border);vertical-align:top}tr:hover td{background:#f7fafc}
-  .km{text-align:center;font-weight:600}.km.warn{color:var(--yellow)}
-  .budget-bar-bg{background:#edf2f7;border-radius:8px;height:24px;overflow:hidden;margin:8px 0}.budget-bar-fg{height:100%;border-radius:8px;background:linear-gradient(90deg,#48bb78,#38a169)}.budget-bar-fg.warn{background:linear-gradient(90deg,#ed8936,#dd6b20)}
-  .cards-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px}
-  .stat-card{background:var(--card);border-radius:12px;padding:16px 20px;border:1px solid var(--border);text-align:center}
-  .stat-card .label{font-size:12px;color:var(--muted)}.stat-card .value{font-size:24px;font-weight:700;margin:4px 0}.stat-card .sub{font-size:12px;color:var(--muted)}
-  .footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
-  .badge{display:inline-block;padding:1px 6px;border-radius:6px;font-size:10px;font-weight:700}
-  .badge.a{background:#1a365d;color:#fff}.badge.b{background:#b7791f;color:#fff}
-  @media(max-width:768px){.grid,.cards-3{grid-template-columns:1fr}.header{flex-direction:column;text-align:center;gap:12px}}
+:root{--bg:#f0f4f8;--card:#fff;--text:#2d3748;--muted:#718096;--blue:#2b6cb0;--green:#276749;--red:#c53030;--yellow:#b7791f;--border:#e2e8f0;--tag-green:#c6f6d5;--tag-red:#fed7d7;--tag-yellow:#feebc8}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;padding:20px}
+.container{max-width:1340px;margin:0 auto}
+.header{background:linear-gradient(135deg,#1a365d,#2b6cb0);color:#fff;padding:24px 32px;border-radius:16px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center}
+.header h1{font-size:24px}.header .sub{opacity:.85;font-size:14px;margin-top:4px}
+.live-badge{background:#48bb78;padding:6px 14px;border-radius:20px;font-size:13px;font-weight:600;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+.route-main-tabs{display:flex;gap:10px;margin-bottom:20px}
+.route-main-tab{flex:1;padding:16px 20px;border-radius:14px;border:2.5px solid var(--border);background:#fff;cursor:pointer;text-align:center;transition:all .2s}
+.route-main-tab:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.08)}
+.route-main-tab.a.active{background:linear-gradient(135deg,#1a365d,#2b6cb0);color:#fff;border-color:#1a365d}
+.route-main-tab.b.active{background:linear-gradient(135deg,#92400e,#b7791f);color:#fff;border-color:#92400e}
+.route-main-tab .rtitle{font-size:18px;font-weight:700}
+.route-main-tab .rdetail{font-size:13px;opacity:.7;margin-top:4px}
+.route-main-tab.active .rdetail{opacity:.9}
+.route-main-tab .rbadge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:700;margin-top:6px}
+.route-main-tab.a .rbadge{background:#1a365d33;color:#1a365d}
+.route-main-tab.b .rbadge{background:#92400e33;color:#92400e}
+.route-main-tab.active .rbadge{background:#ffffff33;color:#fff}
+.family-sub-tabs{display:flex;gap:6px;margin-bottom:18px}
+.family-sub-tab{flex:1;padding:10px 16px;border-radius:8px;border:1.5px solid var(--border);background:#fff;cursor:pointer;font-size:13px;font-weight:600;text-align:center;transition:all .15s}
+.family-sub-tab.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+.route-content,.family-content{display:none}
+.route-content.active,.family-content.active{display:block}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px}
+.card{background:var(--card);border-radius:12px;padding:20px 24px;box-shadow:0 1px 3px rgba(0,0,0,.06);border:1px solid var(--border)}
+.card h3{font-size:16px;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--border)}
+.full{grid-column:1/-1}
+.price-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)}
+.price-row:last-child{border:none}.route{font-weight:600}.price{font-size:20px;font-weight:700}
+.price.good{color:var(--green)}.price.near{color:var(--yellow)}.price.high{color:var(--red)}
+.tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600}
+.tag.good{background:var(--tag-green);color:var(--green)}.tag.near{background:var(--tag-yellow);color:var(--yellow)}.tag.high{background:var(--tag-red);color:var(--red)}
+.timeline{position:relative;padding-left:24px}.timeline::before{content:'';position:absolute;left:8px;top:4px;bottom:4px;width:2px;background:var(--border)}
+.tl-item{position:relative;margin-bottom:12px;padding-left:12px}.tl-item::before{content:'';position:absolute;left:-20px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--blue)}
+.tl-item.done::before{background:var(--green)}.tl-item.next::before{background:var(--red);animation:pulse 2s infinite}
+.tl-date{font-size:12px;color:var(--muted)}.tl-text{font-size:14px}
+table{width:100%;border-collapse:collapse;font-size:12px}th{background:#edf2f7;padding:7px 5px;text-align:left;font-weight:600;font-size:10px}
+td{padding:6px 5px;border-bottom:1px solid var(--border);vertical-align:top}tr:hover td{background:#f7fafc}
+.km{text-align:center;font-weight:600}.km.warn{color:var(--yellow)}
+.badge{display:inline-block;padding:1px 6px;border-radius:6px;font-size:10px;font-weight:700}
+.badge.a{background:#1a365d;color:#fff}.badge.b{background:#b7791f;color:#fff}
+.footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
+@media(max-width:768px){.grid{grid-template-columns:1fr}.header{flex-direction:column;text-align:center;gap:12px}}
 </style>
 </head>
 <body>
 <div class="container">
-  <div class="header">
-    <div><h1>🏔️ 北疆自驾游 · 蹲票仪表板</h1><div class="sub">2026年8月 | 9-10天 | 每日驾驶≤380km | 双路线备选</div></div>
-    <div style="text-align:right"><div class="live-badge">🔴 蹲票中</div><div style="font-size:12px;opacity:.8">更新：<span P26-07-03 15:46</span></div><div style="font-size:12px;opacity:.6">5分钟刷新 | <a href="#" onclick="location.reload()" style="color:#bee3f8">手动</a></div></div>
-  </div>
+<div class="header">
+<div><h1>🏔️ 北疆自驾游 · 蹲票仪表板</h1><div class="sub">2026年8月 | 9-10天 | 每日驾驶≤380km | 双路线备选</div></div>
+<div style="text-align:right"><div class="live-badge">🔴 蹲票中</div><div style="font-size:12px;opacity:.8">更新：<span P26-07-03 16:11</span></div><div style="font-size:12px;opacity:.6">5分钟刷新 | <a href="#" onclick="location.reload()" style="color:#bee3f8">手动</a></div></div>
+</div>
 
-  <!-- SHARED: FLIGHT PRICES -->
-  <div class="card full" style="margin-bottom:16px">
-    <h3>✈️ 实时机票行情</h3>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:14px">
-      <div style="padding:10px;background:#f0f7ff;border-radius:8px"><div class="route">北京 → 伊宁 <span class="badge a">方案A去</span></div><div style="font-size:11px;color:var(--muted)">南航CZ/国航CA 直飞 5h</div><div class="price near">¥1,000-1,100</div><span class="tag near">⚠️ 差¥150-250</span></div>
-      <div style="padding:10px;background:#fffdf0;border-radius:8px"><div class="route">北京 → 乌鲁木齐 <span class="badge b">方案B去</span></div><div style="font-size:11px;color:var(--muted)">每日20+班 · 竞争最激烈</div><div class="price near">待查</div><span class="tag near">🆕 追踪中</span></div>
-      <div style="padding:10px;background:#f0fff4;border-radius:8px"><div class="route">乌鲁木齐 → 北京 <span class="badge a">方案A返</span></div><div style="font-size:11px;color:var(--muted)">每日10+班 3.5-4h</div><div class="price good">¥750-1,000</div><span class="tag good">🟢 已达标</span></div>
-      <div style="padding:10px;background:#f0f7ff;border-radius:8px"><div class="route">伊宁 → 北京 <span class="badge b">方案B返</span></div><div style="font-size:11px;color:var(--muted)">南航/国航 直飞 5h</div><div class="price near">待查</div><span class="tag near">🆕 追踪中</span></div>
-    </div>
-    <div style="margin-top:10px;font-size:13px">🎯 目标 ≤¥850/成人 | 哪个先出好价走哪个 | 7/8海航 · <span style="color:#c53030">7/15国航</span> · 7/18东航 · <span style="color:#c53030">7/28南航</span></div>
-  </div>
+<!-- FLIGHT PRICES -->
+<div class="card full" style="margin-bottom:20px"><h3>✈️ 实时机票行情</h3>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:14px">
+<div style="padding:10px;background:#f0f7ff;border-radius:8px"><div class="route">北京→伊宁 <span class="badge a">方案A去</span></div><div style="font-size:11px;color:var(--muted)">南航CZ/国航CA 直飞5h</div><div class="price near">¥1,000-1,100</div><span class="tag near">⚠️差¥150-250</span></div>
+<div style="padding:10px;background:#fffdf0;border-radius:8px"><div class="route">北京→乌鲁木齐 <span class="badge b">方案B去</span></div><div style="font-size:11px;color:var(--muted)">每日20+班·竞争最激烈</div><div class="price near">待查</div><span class="tag near">🆕追踪中</span></div>
+<div style="padding:10px;background:#f0fff4;border-radius:8px"><div class="route">乌鲁木齐→北京 <span class="badge a">方案A返</span></div><div style="font-size:11px;color:var(--muted)">每日10+班 3.5-4h</div><div class="price good">¥750-1,000</div><span class="tag good">🟢已达标</span></div>
+<div style="padding:10px;background:#f0f7ff;border-radius:8px"><div class="route">伊宁→北京 <span class="badge b">方案B返</span></div><div style="font-size:11px;color:var(--muted)">南航/国航 直飞5h</div><div class="price near">待查</div><span class="tag near">🆕追踪中</span></div>
+</div>
+<div style="margin-top:10px;font-size:13px">🎯目标≤¥850/成人 | 哪个先出好价走哪个 | 7/8海航·<span style="color:#c53030">7/15国航</span>·7/18东航·<span style="color:#c53030">7/28南航</span></div>
+</div>
 
-  <!-- ═══════════ ROUTE MAP: Plan A ═══════════ -->
-  <div class="card full" style="padding:16px 20px;margin-bottom:20px">
-    <h3>🗺️ 方案A：伊宁进 → 乌市出（逆时针环线）</h3>
-    <svg viewBox="0 0 780 440" style="width:100%;height:auto;font-family:-apple-system,sans-serif">
-      <defs>
-        <marker id="arrA_green" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#38a169"/></marker>
-        <marker id="arrA_yellow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#d69e2e"/></marker>
-        <marker id="arrA_orange" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#dd6b20"/></marker>
-        <marker id="arrA_red" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#e53e3e"/></marker>
-        <marker id="arrA_purple" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#805ad5"/></marker>
-      </defs>
-      <rect width="780" height="440" rx="14" fill="#fdfdfe"/>
-      <!-- Background province outline -->
-      <ellipse cx="420" cy="220" rx="340" ry="180" fill="#f7fafc" stroke="#e8edf2" stroke-width="1.5" stroke-dasharray="8,4"/>
-      <text x="420" y="15" text-anchor="middle" font-size="10" fill="#cbd5e0">新疆北部 · 逆时针环线</text>
+<!-- ═══════════ TOP-LEVEL ROUTE TABS ═══════════ -->
+<div class="route-main-tabs">
+<div class="route-main-tab a active" onclick="switchRoute('a')"><div class="rtitle">🛫 方案A：伊宁进·乌市出</div><div class="rdetail">逆时针环线·先草原后喀纳斯·D6最长450km</div><div class="rbadge">✈️北京→伊宁 + 乌市→北京</div></div>
+<div class="route-main-tab b" onclick="switchRoute('b')"><div class="rtitle">🛫 方案B：乌市进·伊宁出</div><div class="rdetail">顺时针环线·先喀纳斯后草原·每日≤380km</div><div class="rbadge">✈️北京→乌市 + 伊宁→北京</div></div>
+</div>
 
-      <!-- Segments: D1→D2 伊宁→赛湖 -->
-      <line x1="120" y1="310" x2="160" y2="260" stroke="#38a169" stroke-width="4" stroke-linecap="round" marker-end="url(#arrA_green)"/>
-      <!-- D2→D3 赛湖→喀拉峻 -->
-      <line x1="160" y1="260" x2="240" y2="340" stroke="#38a169" stroke-width="4" stroke-linecap="round" marker-end="url(#arrA_green)"/>
-      <!-- D3→D4 喀拉峻→那拉提 -->
-      <line x1="240" y1="340" x2="320" y2="360" stroke="#38a169" stroke-width="4" stroke-linecap="round" marker-end="url(#arrA_green)"/>
-      <!-- D4→D5 那拉提→独库/奎屯 -->
-      <line x1="320" y1="360" x2="430" y2="280" stroke="#d69e2e" stroke-width="4" stroke-linecap="round" marker-end="url(#arrA_yellow)"/>
-      <!-- D5→D6 奎屯→魔鬼城/布尔津 -->
-      <line x1="430" y1="280" x2="530" y2="180" stroke="#dd6b20" stroke-width="4" stroke-linecap="round" marker-end="url(#arrA_orange)"/>
-      <!-- D6→D7 布尔津→喀纳斯 -->
-      <line x1="530" y1="180" x2="610" y2="100" stroke="#e53e3e" stroke-width="4" stroke-linecap="round" marker-end="url(#arrA_red)"/>
-      <!-- D7→D8 喀纳斯→禾木 -->
-      <line x1="610" y1="100" x2="680" y2="120" stroke="#e53e3e" stroke-width="4" stroke-linecap="round" marker-end="url(#arrA_red)"/>
-      <!-- D8→D9 禾木→福海 -->
-      <line x1="680" y1="120" x2="650" y2="230" stroke="#805ad5" stroke-width="4" stroke-linecap="round" marker-end="url(#arrA_purple)"/>
-      <!-- D9→D10 福海→乌市 -->
-      <line x1="650" y1="230" x2="620" y2="330" stroke="#805ad5" stroke-width="4" stroke-linecap="round" marker-end="url(#arrA_purple)"/>
+<!-- ═══════════ ROUTE A ═══════════ -->
+<div id="route-a" class="route-content active">
+<div class="card full" style="padding:16px 20px;margin-bottom:20px"><h3>🗺️ 方案A路线图·伊宁进→乌市出（逆时针环线）</h3>
+<svg viewBox="0 0 780 440" style="width:100%;height:auto;font-family:-apple-system,sans-serif">
+<defs>
+<marker id="ma_g" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#38a169"/></marker>
+<marker id="ma_y" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#d69e2e"/></marker>
+<marker id="ma_o" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#dd6b20"/></marker>
+<marker id="ma_r" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#e53e3e"/></marker>
+<marker id="ma_p" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#805ad5"/></marker>
+</defs>
+<rect width="780" height="440" rx="14" fill="#fdfdfe"/>
+<ellipse cx="420" cy="220" rx="340" ry="180" fill="#f7fafc" stroke="#e8edf2" stroke-width="1.5" stroke-dasharray="8,4"/>
+<text x="420" y="15" text-anchor="middle" font-size="10" fill="#cbd5e0">新疆北部·逆时针环线</text>
+<line x1="120" y1="310" x2="160" y2="260" stroke="#38a169" stroke-width="4" stroke-linecap="round" marker-end="url(#ma_g)"/>
+<line x1="160" y1="260" x2="240" y2="340" stroke="#38a169" stroke-width="4" stroke-linecap="round" marker-end="url(#ma_g)"/>
+<line x1="240" y1="340" x2="320" y2="360" stroke="#38a169" stroke-width="4" stroke-linecap="round" marker-end="url(#ma_g)"/>
+<line x1="320" y1="360" x2="430" y2="280" stroke="#d69e2e" stroke-width="4" stroke-linecap="round" marker-end="url(#ma_y)"/>
+<line x1="430" y1="280" x2="530" y2="180" stroke="#dd6b20" stroke-width="4" stroke-linecap="round" marker-end="url(#ma_o)"/>
+<line x1="530" y1="180" x2="610" y2="100" stroke="#e53e3e" stroke-width="4" stroke-linecap="round" marker-end="url(#ma_r)"/>
+<line x1="610" y1="100" x2="680" y2="120" stroke="#e53e3e" stroke-width="4" stroke-linecap="round" marker-end="url(#ma_r)"/>
+<line x1="680" y1="120" x2="650" y2="230" stroke="#805ad5" stroke-width="4" stroke-linecap="round" marker-end="url(#ma_p)"/>
+<line x1="650" y1="230" x2="620" y2="330" stroke="#805ad5" stroke-width="4" stroke-linecap="round" marker-end="url(#ma_p)"/>
+<circle cx="120" cy="310" r="18" fill="#2b6cb0" stroke="white" stroke-width="3"/><text x="120" y="315" text-anchor="middle" fill="white" font-size="10" font-weight="700">D1</text><text x="80" y="305" text-anchor="end" fill="#2b6cb0" font-size="12" font-weight="700">✈️伊宁</text>
+<circle cx="160" cy="260" r="16" fill="#38a169" stroke="white" stroke-width="3"/><text x="160" y="264" text-anchor="middle" fill="white" font-size="10" font-weight="700">D2</text><text x="135" y="245" text-anchor="middle" fill="#2d3748" font-size="11" font-weight="600">赛里木湖</text>
+<circle cx="240" cy="340" r="16" fill="#38a169" stroke="white" stroke-width="3"/><text x="240" y="344" text-anchor="middle" fill="white" font-size="10" font-weight="700">D3</text><text x="210" y="365" text-anchor="end" fill="#2d3748" font-size="11" font-weight="600">喀拉峻</text>
+<circle cx="320" cy="360" r="16" fill="#38a169" stroke="white" stroke-width="3"/><text x="320" y="364" text-anchor="middle" fill="white" font-size="10" font-weight="700">D4</text><text x="320" y="388" text-anchor="middle" fill="#2d3748" font-size="11" font-weight="600">那拉提</text>
+<circle cx="430" cy="280" r="18" fill="#d69e2e" stroke="white" stroke-width="3"/><text x="430" y="284" text-anchor="middle" fill="white" font-size="10" font-weight="700">D5</text><text x="430" y="310" text-anchor="middle" fill="#2d3748" font-size="11" font-weight="600">独库·奎屯</text>
+<circle cx="530" cy="180" r="18" fill="#dd6b20" stroke="white" stroke-width="3"/><text x="530" y="184" text-anchor="middle" fill="white" font-size="10" font-weight="700">D6</text><text x="560" y="172" text-anchor="start" fill="#2d3748" font-size="11" font-weight="600">魔鬼城→布尔津</text>
+<circle cx="610" cy="100" r="16" fill="#e53e3e" stroke="white" stroke-width="3"/><text x="610" y="104" text-anchor="middle" fill="white" font-size="10" font-weight="700">D7</text><text x="585" y="85" text-anchor="end" fill="#2d3748" font-size="11" font-weight="600">喀纳斯</text>
+<circle cx="680" cy="120" r="16" fill="#e53e3e" stroke="white" stroke-width="3"/><text x="680" y="124" text-anchor="middle" fill="white" font-size="10" font-weight="700">D8</text><text x="710" y="115" text-anchor="start" fill="#2d3748" font-size="11" font-weight="600">禾木</text>
+<circle cx="650" cy="230" r="16" fill="#805ad5" stroke="white" stroke-width="3"/><text x="650" y="234" text-anchor="middle" fill="white" font-size="10" font-weight="700">D9</text><text x="678" y="228" text-anchor="start" fill="#2d3748" font-size="11" font-weight="600">福海</text>
+<circle cx="620" cy="330" r="20" fill="#c53030" stroke="white" stroke-width="3"/><text x="620" y="335" text-anchor="middle" fill="white" font-size="10" font-weight="700">D10</text><text x="620" y="362" text-anchor="middle" fill="#c53030" font-size="12" font-weight="700">✈️乌市返京</text>
+<rect x="18" y="18" width="200" height="78" rx="8" fill="white" stroke="#e8edf2" stroke-width="1"/>
+<text x="32" y="36" font-size="10" font-weight="700" fill="#2d3748">🗺️图例</text>
+<line x1="32" y1="48" x2="58" y2="48" stroke="#38a169" stroke-width="3"/><text x="65" y="52" font-size="9" fill="#4a5568">D1-D4 伊犁草原</text>
+<line x1="32" y1="62" x2="58" y2="62" stroke="#d69e2e" stroke-width="3"/><text x="65" y="66" font-size="9" fill="#4a5568">D5 独库公路</text>
+<line x1="32" y1="76" x2="58" y2="76" stroke="#e53e3e" stroke-width="3"/><text x="65" y="80" font-size="9" fill="#4a5568">D6-D8 喀纳斯</text>
+<line x1="135" y1="76" x2="161" y2="76" stroke="#805ad5" stroke-width="3"/><text x="168" y="80" font-size="9" fill="#4a5568">D9-D10 返程</text>
+</svg></div>
 
-      <!-- Stops -->
-      <circle cx="120" cy="310" r="18" fill="#2b6cb0" stroke="white" stroke-width="3"/><text x="120" y="315" text-anchor="middle" fill="white" font-size="10" font-weight="700">D1</text><text x="80" y="305" text-anchor="end" fill="#2b6cb0" font-size="12" font-weight="700">✈️ 伊宁</text>
-      <circle cx="160" cy="260" r="16" fill="#38a169" stroke="white" stroke-width="3"/><text x="160" y="264" text-anchor="middle" fill="white" font-size="10" font-weight="700">D2</text><text x="135" y="245" text-anchor="middle" fill="#2d3748" font-size="11" font-weight="600">赛里木湖</text>
-      <circle cx="240" cy="340" r="16" fill="#38a169" stroke="white" stroke-width="3"/><text x="240" y="344" text-anchor="middle" fill="white" font-size="10" font-weight="700">D3</text><text x="210" y="365" text-anchor="end" fill="#2d3748" font-size="11" font-weight="600">喀拉峻</text>
-      <circle cx="320" cy="360" r="16" fill="#38a169" stroke="white" stroke-width="3"/><text x="320" y="364" text-anchor="middle" fill="white" font-size="10" font-weight="700">D4</text><text x="320" y="388" text-anchor="middle" fill="#2d3748" font-size="11" font-weight="600">那拉提</text>
-      <circle cx="430" cy="280" r="18" fill="#d69e2e" stroke="white" stroke-width="3"/><text x="430" y="284" text-anchor="middle" fill="white" font-size="10" font-weight="700">D5</text><text x="430" y="310" text-anchor="middle" fill="#2d3748" font-size="11" font-weight="600">独库·奎屯</text>
-      <circle cx="530" cy="180" r="18" fill="#dd6b20" stroke="white" stroke-width="3"/><text x="530" y="184" text-anchor="middle" fill="white" font-size="10" font-weight="700">D6</text><text x="560" y="172" text-anchor="start" fill="#2d3748" font-size="11" font-weight="600">魔鬼城→布尔津</text>
-      <circle cx="610" cy="100" r="16" fill="#e53e3e" stroke="white" stroke-width="3"/><text x="610" y="104" text-anchor="middle" fill="white" font-size="10" font-weight="700">D7</text><text x="585" y="85" text-anchor="end" fill="#2d3748" font-size="11" font-weight="600">喀纳斯</text>
-      <circle cx="680" cy="120" r="16" fill="#e53e3e" stroke="white" stroke-width="3"/><text x="680" y="124" text-anchor="middle" fill="white" font-size="10" font-weight="700">D8</text><text x="710" y="115" text-anchor="start" fill="#2d3748" font-size="11" font-weight="600">禾木</text>
-      <circle cx="650" cy="230" r="16" fill="#805ad5" stroke="white" stroke-width="3"/><text x="650" y="234" text-anchor="middle" fill="white" font-size="10" font-weight="700">D9</text><text x="678" y="228" text-anchor="start" fill="#2d3748" font-size="11" font-weight="600">福海</text>
-      <circle cx="620" cy="330" r="20" fill="#c53030" stroke="white" stroke-width="3"/><text x="620" y="335" text-anchor="middle" fill="white" font-size="10" font-weight="700">D10</text><text x="620" y="362" text-anchor="middle" fill="#c53030" font-size="12" font-weight="700">✈️ 乌市返京</text>
+<div class="family-sub-tabs">
+<div class="family-sub-tab active" onclick="switchFamily('a','single')">👨‍👩‍👧 单家庭·哈弗大狗·1间·¥19,968</div>
+<div class="family-sub-tab" onclick="switchFamily('a','double')">👨‍👩‍👧‍👦 双家庭·别克GL8·2间·¥20,138/家庭</div>
+</div>
 
-      <!-- Section labels -->
-      <rect x="18" y="18" width="200" height="94" rx="8" fill="white" stroke="#e8edf2" stroke-width="1"/>
-      <text x="32" y="38" font-size="11" font-weight="700" fill="#2d3748">🗺️ 路线图例</text>
-      <line x1="32" y1="52" x2="60" y2="52" stroke="#38a169" stroke-width="3" stroke-linecap="round"/><text x="68" y="56" font-size="10" fill="#4a5568">D1-D4 伊犁草原段</text>
-      <line x1="32" y1="68" x2="60" y2="68" stroke="#d69e2e" stroke-width="3" stroke-linecap="round"/><text x="68" y="72" font-size="10" fill="#4a5568">D5 独库公路段</text>
-      <line x1="32" y1="84" x2="60" y2="84" stroke="#e53e3e" stroke-width="3" stroke-linecap="round"/><text x="68" y="88" font-size="10" fill="#4a5568">D6-D8 喀纳斯段</text>
-      <line x1="32" y1="100" x2="60" y2="100" stroke="#805ad5" stroke-width="3" stroke-linecap="round"/><text x="68" y="104" font-size="10" fill="#4a5568">D8-D10 南下返程</text>
-    </svg>
-  </div>
+<div id="fam-a-single" class="family-content active">
+<div class="card full" style="margin-bottom:20px"><h3>方案A·伊宁进乌市出·单家庭·哈弗大狗·¥19,968</h3>
+<table><thead><tr><th>天</th><th>行程</th><th>驾驶</th><th>交通</th><th>住宿</th><th>花费</th><th>景点安排</th><th>餐饮推荐</th></tr></thead><tbody>
+<tr><td>D1</td><td>🛫北京→伊宁</td><td class="km">5km</td><td>✈️+🚗</td><td>全季¥275</td><td>¥465</td><td>抵达伊宁·取车·六星街夜市</td><td>🍽️古兰丹姆冰淇淋·烤包子</td></tr>
+<tr><td>D2</td><td>💙赛里木湖+果子沟</td><td class="km">300km</td><td>🚗</td><td>全季¥275</td><td>¥755</td><td>赛湖环湖90km(月亮湾·天鹅·S弯)·果子沟大桥·喀赞其</td><td>🍽️自备路餐·晚:喀赞其庭院餐厅</td></tr>
+<tr><td>D3</td><td>🌿特克斯+喀拉峻</td><td class="km">250km</td><td>🚗</td><td>巩留H¥250</td><td>¥990</td><td>八卦城·喀拉峻草原(鲜花台·猎鹰台·鳄鱼湾)</td><td>🍽️午:特克斯拌面·晚:巩留夜市</td></tr>
+<tr><td>D4</td><td>🏔️那拉提全天</td><td class="km">180km</td><td>🚗</td><td>柏納¥330</td><td>¥950</td><td>空中草原·游牧人家·骑马¥80/h·盘龙谷道</td><td>🍽️午:游客中心·晚:清炖羊肉</td></tr>
+<tr><td>D5</td><td>🛣️独库北段</td><td class="km">260km</td><td>🚗</td><td>全季¥260</td><td>¥480</td><td>乔尔玛·哈希勒根达坂3400m·天瀑·守望天山</td><td>🍽️午:独山子拌面·晚:椒麻鸡</td></tr>
+<tr><td>D6</td><td>🏜️魔鬼城→布尔津</td><td class="km warn">450km</td><td>🚗</td><td>松果¥260</td><td>¥574</td><td>乌尔禾魔鬼城(雅丹·小火车)·布尔津河堤夜市</td><td>🍽️午:乌尔禾拌面·晚:🔥烤狗鱼</td></tr>
+<tr><td>D7</td><td>🏞️喀纳斯</td><td class="km">140km</td><td>🚗</td><td>苏豪¥340</td><td>¥1,380</td><td>贾登峪换乘·观鱼台1068台阶·三湾徒步</td><td>🍽️自备干粮·晚:图瓦火锅</td></tr>
+<tr><td>D8</td><td>🌅禾木村</td><td class="km">60km</td><td>🚗</td><td>木屋¥440</td><td>¥734</td><td>禾木桥·白桦林·骑马·观景台日落·星空</td><td>🍽️午:村内简餐·晚:土火锅</td></tr>
+<tr><td>D9</td><td>🌅禾木晨雾→福海</td><td class="km">280km</td><td>🚗</td><td>帝苑¥250</td><td>¥440</td><td>禾木晨雾(6:30)·福海乌伦古湖日落</td><td>🍽️午:布尔津拌面·晚:🔥冷水鱼宴</td></tr>
+<tr><td>D10</td><td>🏠福海→乌市✈️</td><td class="km">380km</td><td>🚗+✈️</td><td>🏠回家</td><td>¥190</td><td>S21沙漠公路·大巴扎补货</td><td>🍽️午:楼兰秘烤/血站大盘鸡</td></tr>
+<tr style="font-weight:700;background:#f7fafc;border-top:2px solid var(--text)"><td colspan="6" style="text-align:right">🚗哈弗大狗¥230×9天+🏨8晚+🎫门票+🍽️</td><td style="color:var(--green);font-size:16px">¥19,968</td><td>✅</td></tr>
+</tbody></table></div></div>
 
-  <!-- ROUTE MAP: Plan B -->
-  <div class="card full" style="padding:16px 20px;margin-bottom:20px">
-    <h3>🗺️ 方案B：乌市进 → 伊宁出（顺时针环线）</h3>
-    <svg viewBox="0 0 780 440" style="width:100%;height:auto;font-family:-apple-system,sans-serif">
-      <defs>
-        <marker id="arrB_purple" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#805ad5"/></marker>
-        <marker id="arrB_red" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#e53e3e"/></marker>
-        <marker id="arrB_orange" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#dd6b20"/></marker>
-        <marker id="arrB_yellow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#d69e2e"/></marker>
-        <marker id="arrB_green" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#38a169"/></marker>
-      </defs>
-      <rect width="780" height="440" rx="14" fill="#fdfdfe"/>
-      <ellipse cx="420" cy="220" rx="340" ry="180" fill="#f7fafc" stroke="#e8edf2" stroke-width="1.5" stroke-dasharray="8,4"/>
-      <text x="420" y="15" text-anchor="middle" font-size="10" fill="#cbd5e0">新疆北部 · 顺时针环线</text>
+<div id="fam-a-double" class="family-content">
+<div class="card full" style="margin-bottom:20px"><h3>方案A·伊宁进乌市出·双家庭·GL8·¥20,138/家庭</h3>
+<table><thead><tr><th>天</th><th>行程</th><th>驾驶</th><th>交通</th><th>住宿</th><th>花费</th><th>景点安排</th><th>餐饮推荐</th></tr></thead><tbody>
+<tr><td>D1</td><td>🛫北京→伊宁</td><td class="km">5km</td><td>✈️+🚗</td><td>全季×2¥550</td><td>¥450</td><td>抵达伊宁·取车·六星街夜市</td><td>🍽️古兰丹姆冰淇淋·烤包子</td></tr>
+<tr><td>D2</td><td>💙赛里木湖+果子沟</td><td class="km">300km</td><td>🚗</td><td>全季×2¥550</td><td>¥740</td><td>赛湖环湖90km·果子沟大桥·喀赞其</td><td>🍽️自备路餐·晚:喀赞其餐厅</td></tr>
+<tr><td>D3</td><td>🌿特克斯+喀拉峻</td><td class="km">250km</td><td>🚗</td><td>巩留H×2¥500</td><td>¥975</td><td>八卦城·喀拉峻草原(鲜花台·猎鹰台)</td><td>🍽️午:特克斯拌面·晚:巩留夜市</td></tr>
+<tr><td>D4</td><td>🏔️那拉提全天</td><td class="km">180km</td><td>🚗</td><td>柏納×2¥660</td><td>¥935</td><td>空中草原·游牧人家·骑马·盘龙谷道</td><td>🍽️午:游客中心·晚:清炖羊肉</td></tr>
+<tr><td>D5</td><td>🛣️独库北段</td><td class="km">260km</td><td>🚗</td><td>全季×2¥520</td><td>¥465</td><td>乔尔玛·哈希勒根达坂3400m·天瀑</td><td>🍽️午:独山子拌面·晚:椒麻鸡</td></tr>
+<tr><td>D6</td><td>🏜️魔鬼城→布尔津</td><td class="km warn">450km</td><td>🚗</td><td>松果×2¥520</td><td>¥559</td><td>乌尔禾魔鬼城·布尔津河堤夜市</td><td>🍽️午:乌尔禾拌面·晚:🔥烤狗鱼</td></tr>
+<tr><td>D7</td><td>🏞️喀纳斯</td><td class="km">140km</td><td>🚗</td><td>苏豪×2¥680</td><td>¥1,365</td><td>贾登峪换乘·观鱼台·三湾徒步</td><td>🍽️自备干粮·晚:图瓦火锅</td></tr>
+<tr><td>D8</td><td>🌅禾木村</td><td class="km">60km</td><td>🚗</td><td>木屋×2¥880</td><td>¥719</td><td>禾木桥·白桦林·骑马·观景台日落</td><td>🍽️午:村内简餐·晚:土火锅</td></tr>
+<tr><td>D9</td><td>🌅禾木晨雾→福海</td><td class="km">280km</td><td>🚗</td><td>帝苑×2¥500</td><td>¥425</td><td>禾木晨雾·福海乌伦古湖日落</td><td>🍽️午:布尔津拌面·晚:🔥冷水鱼宴</td></tr>
+<tr><td>D10</td><td>🏠福海→乌市✈️</td><td class="km">380km</td><td>🚗+✈️</td><td>🏠回家</td><td>¥175</td><td>S21沙漠公路·大巴扎补货</td><td>🍽️午:楼兰秘烤/大盘鸡</td></tr>
+<tr style="font-weight:700;background:#f7fafc;border-top:2px solid var(--text)"><td colspan="6" style="text-align:right">🚗别克GL8¥420×9天+🏨8晚×2间+🎫+🍽️</td><td style="font-size:16px">¥20,138</td><td>/家庭</td></tr>
+</tbody></table></div></div>
+</div>
 
-      <!-- Segments: D1→D2 乌市→福海 -->
-      <line x1="620" y1="330" x2="650" y2="230" stroke="#805ad5" stroke-width="4" stroke-linecap="round" marker-end="url(#arrB_purple)"/>
-      <!-- D2→D3 福海→喀纳斯 -->
-      <line x1="650" y1="230" x2="610" y2="100" stroke="#e53e3e" stroke-width="4" stroke-linecap="round" marker-end="url(#arrB_red)"/>
-      <!-- D3→D4 喀纳斯→禾木 -->
-      <line x1="610" y1="100" x2="680" y2="120" stroke="#e53e3e" stroke-width="4" stroke-linecap="round" marker-end="url(#arrB_red)"/>
-      <!-- D4→D5 禾木→魔鬼城 -->
-      <line x1="680" y1="120" x2="530" y2="180" stroke="#dd6b20" stroke-width="4" stroke-linecap="round" marker-end="url(#arrB_orange)"/>
-      <!-- D5→D6 魔鬼城→奎屯 -->
-      <line x1="530" y1="180" x2="430" y2="280" stroke="#dd6b20" stroke-width="4" stroke-linecap="round" marker-end="url(#arrB_orange)"/>
-      <!-- D6→D7 奎屯→独库 -->
-      <line x1="430" y1="280" x2="350" y2="340" stroke="#d69e2e" stroke-width="4" stroke-linecap="round" marker-end="url(#arrB_yellow)"/>
-      <!-- D7→D8 独库→那拉提 -->
-      <line x1="350" y1="340" x2="320" y2="360" stroke="#38a169" stroke-width="4" stroke-linecap="round" marker-end="url(#arrB_green)"/>
-      <!-- D8→D9 那拉提→喀拉峻 -->
-      <line x1="320" y1="360" x2="240" y2="340" stroke="#38a169" stroke-width="4" stroke-linecap="round" marker-end="url(#arrB_green)"/>
-      <!-- D9→D10 喀拉峻→赛湖/伊宁 -->
-      <line x1="240" y1="340" x2="120" y2="310" stroke="#38a169" stroke-width="4" stroke-linecap="round" marker-end="url(#arrB_green)"/>
+<!-- ═══════════ ROUTE B ═══════════ -->
+<div id="route-b" class="route-content">
+<div class="card full" style="padding:16px 20px;margin-bottom:20px"><h3>🗺️ 方案B路线图·乌市进→伊宁出（顺时针环线）</h3>
+<svg viewBox="0 0 780 440" style="width:100%;height:auto;font-family:-apple-system,sans-serif">
+<defs>
+<marker id="mb_p" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#805ad5"/></marker>
+<marker id="mb_r" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#e53e3e"/></marker>
+<marker id="mb_o" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#dd6b20"/></marker>
+<marker id="mb_y" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#d69e2e"/></marker>
+<marker id="mb_g" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#38a169"/></marker>
+</defs>
+<rect width="780" height="440" rx="14" fill="#fdfdfe"/>
+<ellipse cx="420" cy="220" rx="340" ry="180" fill="#f7fafc" stroke="#e8edf2" stroke-width="1.5" stroke-dasharray="8,4"/>
+<text x="420" y="15" text-anchor="middle" font-size="10" fill="#cbd5e0">新疆北部·顺时针环线</text>
+<line x1="620" y1="330" x2="650" y2="230" stroke="#805ad5" stroke-width="4" stroke-linecap="round" marker-end="url(#mb_p)"/>
+<line x1="650" y1="230" x2="610" y2="100" stroke="#e53e3e" stroke-width="4" stroke-linecap="round" marker-end="url(#mb_r)"/>
+<line x1="610" y1="100" x2="680" y2="120" stroke="#e53e3e" stroke-width="4" stroke-linecap="round" marker-end="url(#mb_r)"/>
+<line x1="680" y1="120" x2="530" y2="180" stroke="#dd6b20" stroke-width="4" stroke-linecap="round" marker-end="url(#mb_o)"/>
+<line x1="530" y1="180" x2="430" y2="280" stroke="#dd6b20" stroke-width="4" stroke-linecap="round" marker-end="url(#mb_o)"/>
+<line x1="430" y1="280" x2="350" y2="340" stroke="#d69e2e" stroke-width="4" stroke-linecap="round" marker-end="url(#mb_y)"/>
+<line x1="350" y1="340" x2="320" y2="360" stroke="#38a169" stroke-width="4" stroke-linecap="round" marker-end="url(#mb_g)"/>
+<line x1="320" y1="360" x2="240" y2="340" stroke="#38a169" stroke-width="4" stroke-linecap="round" marker-end="url(#mb_g)"/>
+<line x1="240" y1="340" x2="120" y2="310" stroke="#38a169" stroke-width="4" stroke-linecap="round" marker-end="url(#mb_g)"/>
+<circle cx="620" cy="330" r="20" fill="#c53030" stroke="white" stroke-width="3"/><text x="620" y="335" text-anchor="middle" fill="white" font-size="10" font-weight="700">D1</text><text x="620" y="362" text-anchor="middle" fill="#c53030" font-size="12" font-weight="700">✈️乌市抵达</text>
+<circle cx="650" cy="230" r="16" fill="#805ad5" stroke="white" stroke-width="3"/><text x="650" y="234" text-anchor="middle" fill="white" font-size="10" font-weight="700">D2</text><text x="678" y="228" text-anchor="start" fill="#2d3748" font-size="11" font-weight="600">福海</text>
+<circle cx="610" cy="100" r="16" fill="#e53e3e" stroke="white" stroke-width="3"/><text x="610" y="104" text-anchor="middle" fill="white" font-size="10" font-weight="700">D3</text><text x="585" y="85" text-anchor="end" fill="#2d3748" font-size="11" font-weight="600">喀纳斯</text>
+<circle cx="680" cy="120" r="16" fill="#e53e3e" stroke="white" stroke-width="3"/><text x="680" y="124" text-anchor="middle" fill="white" font-size="10" font-weight="700">D4</text><text x="710" y="115" text-anchor="start" fill="#2d3748" font-size="11" font-weight="600">禾木</text>
+<circle cx="530" cy="180" r="18" fill="#dd6b20" stroke="white" stroke-width="3"/><text x="530" y="184" text-anchor="middle" fill="white" font-size="10" font-weight="700">D5</text><text x="500" y="170" text-anchor="end" fill="#2d3748" font-size="11" font-weight="600">魔鬼城</text>
+<circle cx="430" cy="280" r="16" fill="#38a169" stroke="white" stroke-width="3"/><text x="430" y="284" text-anchor="middle" fill="white" font-size="10" font-weight="700">D6</text><text x="400" y="275" text-anchor="end" fill="#2d3748" font-size="11" font-weight="600">奎屯休整</text>
+<circle cx="350" cy="340" r="18" fill="#d69e2e" stroke="white" stroke-width="3"/><text x="350" y="344" text-anchor="middle" fill="white" font-size="10" font-weight="700">D7</text><text x="330" y="325" text-anchor="end" fill="#2d3748" font-size="11" font-weight="600">独库公路</text>
+<circle cx="320" cy="360" r="16" fill="#38a169" stroke="white" stroke-width="3"/><text x="320" y="364" text-anchor="middle" fill="white" font-size="10" font-weight="700">D8</text><text x="320" y="388" text-anchor="middle" fill="#2d3748" font-size="11" font-weight="600">那拉提</text>
+<circle cx="240" cy="340" r="16" fill="#38a169" stroke="white" stroke-width="3"/><text x="240" y="344" text-anchor="middle" fill="white" font-size="10" font-weight="700">D9</text><text x="210" y="365" text-anchor="end" fill="#2d3748" font-size="11" font-weight="600">喀拉峻</text>
+<circle cx="120" cy="310" r="20" fill="#2b6cb0" stroke="white" stroke-width="3"/><text x="120" y="315" text-anchor="middle" fill="white" font-size="10" font-weight="700">D10</text><text x="80" y="305" text-anchor="end" fill="#2b6cb0" font-size="12" font-weight="700">✈️伊宁返京</text>
+<rect x="18" y="18" width="200" height="78" rx="8" fill="white" stroke="#e8edf2" stroke-width="1"/>
+<text x="32" y="36" font-size="10" font-weight="700" fill="#2d3748">🗺️图例</text>
+<line x1="32" y1="48" x2="58" y2="48" stroke="#e53e3e" stroke-width="3"/><text x="65" y="52" font-size="9" fill="#4a5568">D1-D4 喀纳斯·北段</text>
+<line x1="32" y1="62" x2="58" y2="62" stroke="#d69e2e" stroke-width="3"/><text x="65" y="66" font-size="9" fill="#4a5568">D6-D7 独库公路</text>
+<line x1="32" y1="76" x2="58" y2="76" stroke="#38a169" stroke-width="3"/><text x="65" y="80" font-size="9" fill="#4a5568">D8-D10 伊犁草原</text>
+<line x1="135" y1="76" x2="161" y2="76" stroke="#805ad5" stroke-width="3"/><text x="168" y="80" font-size="9" fill="#4a5568">D1-D2 沙漠段</text>
+</svg></div>
 
-      <!-- Stops -->
-      <circle cx="620" cy="330" r="20" fill="#c53030" stroke="white" stroke-width="3"/><text x="620" y="335" text-anchor="middle" fill="white" font-size="10" font-weight="700">D1</text><text x="620" y="362" text-anchor="middle" fill="#c53030" font-size="12" font-weight="700">✈️ 乌市抵达</text>
-      <circle cx="650" cy="230" r="16" fill="#805ad5" stroke="white" stroke-width="3"/><text x="650" y="234" text-anchor="middle" fill="white" font-size="10" font-weight="700">D2</text><text x="678" y="228" text-anchor="start" fill="#2d3748" font-size="11" font-weight="600">福海</text>
-      <circle cx="610" cy="100" r="16" fill="#e53e3e" stroke="white" stroke-width="3"/><text x="610" y="104" text-anchor="middle" fill="white" font-size="10" font-weight="700">D3</text><text x="585" y="85" text-anchor="end" fill="#2d3748" font-size="11" font-weight="600">喀纳斯</text>
-      <circle cx="680" cy="120" r="16" fill="#e53e3e" stroke="white" stroke-width="3"/><text x="680" y="124" text-anchor="middle" fill="white" font-size="10" font-weight="700">D4</text><text x="710" y="115" text-anchor="start" fill="#2d3748" font-size="11" font-weight="600">禾木</text>
-      <circle cx="530" cy="180" r="18" fill="#dd6b20" stroke="white" stroke-width="3"/><text x="530" y="184" text-anchor="middle" fill="white" font-size="10" font-weight="700">D5</text><text x="500" y="170" text-anchor="end" fill="#2d3748" font-size="11" font-weight="600">魔鬼城</text>
-      <circle cx="430" cy="280" r="16" fill="#38a169" stroke="white" stroke-width="3"/><text x="430" y="284" text-anchor="middle" fill="white" font-size="10" font-weight="700">D6</text><text x="400" y="275" text-anchor="end" fill="#2d3748" font-size="11" font-weight="600">奎屯休整</text>
-      <circle cx="350" cy="340" r="18" fill="#d69e2e" stroke="white" stroke-width="3"/><text x="350" y="344" text-anchor="middle" fill="white" font-size="10" font-weight="700">D7</text><text x="330" y="325" text-anchor="end" fill="#2d3748" font-size="11" font-weight="600">独库公路</text>
-      <circle cx="320" cy="360" r="16" fill="#38a169" stroke="white" stroke-width="3"/><text x="320" y="364" text-anchor="middle" fill="white" font-size="10" font-weight="700">D8</text><text x="320" y="388" text-anchor="middle" fill="#2d3748" font-size="11" font-weight="600">那拉提</text>
-      <circle cx="240" cy="340" r="16" fill="#38a169" stroke="white" stroke-width="3"/><text x="240" y="344" text-anchor="middle" fill="white" font-size="10" font-weight="700">D9</text><text x="210" y="365" text-anchor="end" fill="#2d3748" font-size="11" font-weight="600">喀拉峻</text>
-      <circle cx="120" cy="310" r="20" fill="#2b6cb0" stroke="white" stroke-width="3"/><text x="120" y="315" text-anchor="middle" fill="white" font-size="10" font-weight="700">D10</text><text x="80" y="305" text-anchor="end" fill="#2b6cb0" font-size="12" font-weight="700">✈️ 伊宁返京</text>
+<div class="family-sub-tabs">
+<div class="family-sub-tab active" onclick="switchFamily('b','single')">👨‍👩‍👧 单家庭·哈弗大狗·1间·≈¥19,800</div>
+<div class="family-sub-tab" onclick="switchFamily('b','double')">👨‍👩‍👧‍👦 双家庭·别克GL8·2间·≈¥20,050/家庭</div>
+</div>
 
-      <!-- Legend -->
-      <rect x="18" y="18" width="200" height="94" rx="8" fill="white" stroke="#e8edf2" stroke-width="1"/>
-      <text x="32" y="38" font-size="11" font-weight="700" fill="#2d3748">🗺️ 路线图例</text>
-      <line x1="32" y1="52" x2="60" y2="52" stroke="#e53e3e" stroke-width="3" stroke-linecap="round"/><text x="68" y="56" font-size="10" fill="#4a5568">D1-D5 喀纳斯·北段</text>
-      <line x1="32" y1="68" x2="60" y2="68" stroke="#d69e2e" stroke-width="3" stroke-linecap="round"/><text x="68" y="72" font-size="10" fill="#4a5568">D6-D7 独库公路段</text>
-      <line x1="32" y1="84" x2="60" y2="84" stroke="#38a169" stroke-width="3" stroke-linecap="round"/><text x="68" y="88" font-size="10" fill="#4a5568">D8-D10 伊犁草原段</text>
-      <line x1="32" y1="100" x2="60" y2="100" stroke="#805ad5" stroke-width="3" stroke-linecap="round"/><text x="68" y="104" font-size="10" fill="#4a5568">D1-D2 沙漠段</text>
-    </svg>
-  </div>
+<div id="fam-b-single" class="family-content active">
+<div class="card full" style="margin-bottom:20px"><h3>方案B·乌市进伊宁出·单家庭·哈弗大狗·≈¥19,800</h3>
+<table><thead><tr><th>天</th><th>行程</th><th>驾驶</th><th>交通</th><th>住宿</th><th>花费</th><th>景点安排</th><th>餐饮推荐</th></tr></thead><tbody>
+<tr><td>D1</td><td>🛫北京→乌鲁木齐</td><td class="km">10km</td><td>✈️+🚗</td><td>全季¥280</td><td>¥470</td><td>抵达乌市·取车·国际大巴扎·红山公园</td><td>🍽️楼兰秘烤·烤包子·大盘鸡</td></tr>
+<tr><td>D2</td><td>🏜️S21→福海</td><td class="km">380km</td><td>🚗</td><td>帝苑¥250</td><td>¥440</td><td>S21阿乌高速·沙漠观景台·福海乌伦古湖日落</td><td>🍽️午:服务区简餐·晚:🔥冷水鱼宴</td></tr>
+<tr><td>D3</td><td>🌊福海→喀纳斯</td><td class="km">260km</td><td>🚗</td><td>苏豪¥340</td><td>¥1,380</td><td>贾登峪换乘·观鱼台1068台阶·三湾徒步</td><td>🍽️自备干粮·晚:图瓦火锅</td></tr>
+<tr><td>D4</td><td>🌅禾木全天</td><td class="km">60km</td><td>🚗</td><td>木屋¥440</td><td>¥734</td><td>禾木桥·白桦林·骑马·观景台日落·星空</td><td>🍽️午:村内简餐·晚:土火锅</td></tr>
+<tr><td>D5</td><td>🌅禾木晨雾→魔鬼城</td><td class="km">360km</td><td>🚗</td><td>乌尔禾¥220</td><td>¥472</td><td>禾木晨雾(6:30)·布尔津·乌尔禾魔鬼城</td><td>🍽️午:布尔津拌面·晚:烤串·馕坑肉</td></tr>
+<tr><td>D6</td><td>🚗乌尔禾→奎屯休整</td><td class="km">250km</td><td>🚗</td><td>全季¥260</td><td>¥450</td><td>上午出发·百里油田·中午到奎屯·下午休息补给</td><td>🍽️午:奎屯拌面·晚:椒麻鸡·胡辣羊蹄</td></tr>
+<tr><td>D7</td><td>🛣️独库北段→那拉提</td><td class="km">260km</td><td>🚗</td><td>柏納¥330</td><td>¥520</td><td>独库北段:天瀑·哈希勒根达坂3400m·守望天山</td><td>🍽️午:乔尔玛服务区·晚:清炖羊肉</td></tr>
+<tr><td>D8</td><td>🏔️那拉提全天</td><td class="km">0km</td><td>—</td><td>柏納¥330</td><td>¥950</td><td>空中草原·游牧人家·骑马¥80/h·盘龙谷道</td><td>🍽️午:游客中心·晚:烤馕·汤饭</td></tr>
+<tr><td>D9</td><td>🌿那拉提→喀拉峻→巩留</td><td class="km">250km</td><td>🚗</td><td>巩留H¥250</td><td>¥990</td><td>喀拉峻草原(鲜花台·猎鹰台·鳄鱼湾)·巩留</td><td>🍽️午:特克斯拌面·晚:巩留夜市</td></tr>
+<tr><td>D10</td><td>💙巩留→赛湖→伊宁✈️</td><td class="km">280km</td><td>🚗+✈️</td><td>🏠回家</td><td>¥480</td><td>赛里木湖环湖90km·果子沟大桥·伊宁还车</td><td>🍽️午:赛湖路餐·机场简餐</td></tr>
+<tr style="font-weight:700;background:#f7fafc;border-top:2px solid var(--text)"><td colspan="6" style="text-align:right">🚗哈弗大狗¥230×9天+🏨8晚+🎫门票+🍽️</td><td style="color:var(--green);font-size:16px">≈¥19,800</td><td>✅</td></tr>
+</tbody></table></div></div>
 
-  <!-- FAMILY TABS CONTENT -->
-  <div class="master-tabs">
-    <div class="master-tab active" onclick="switchMaster('single')"><div class="title">👨‍👩‍👧 单家庭</div><div class="detail">2大1小 · 紧凑SUV · ¥19,968</div></div>
-    <div class="master-tab" onclick="switchMaster('double')"><div class="title">👨‍👩‍👧‍👦 双家庭</div><div class="detail">4大2小 · 别克GL8 · ¥20,138/家庭</div></div>
-  </div>
+<div id="fam-b-double" class="family-content">
+<div class="card full" style="margin-bottom:20px"><h3>方案B·乌市进伊宁出·双家庭·GL8·≈¥20,050/家庭</h3>
+<table><thead><tr><th>天</th><th>行程</th><th>驾驶</th><th>交通</th><th>住宿</th><th>花费</th><th>景点安排</th><th>餐饮推荐</th></tr></thead><tbody>
+<tr><td>D1</td><td>🛫北京→乌鲁木齐</td><td class="km">10km</td><td>✈️+🚗</td><td>全季×2¥560</td><td>¥455</td><td>抵达乌市·取车·国际大巴扎·红山公园</td><td>🍽️楼兰秘烤·烤包子·大盘鸡</td></tr>
+<tr><td>D2</td><td>🏜️S21→福海</td><td class="km">380km</td><td>🚗</td><td>帝苑×2¥500</td><td>¥425</td><td>S21阿乌高速·沙漠观景台·福海乌伦古湖日落</td><td>🍽️午:服务区简餐·晚:🔥冷水鱼宴</td></tr>
+<tr><td>D3</td><td>🌊福海→喀纳斯</td><td class="km">260km</td><td>🚗</td><td>苏豪×2¥680</td><td>¥1,365</td><td>贾登峪换乘·观鱼台·三湾徒步</td><td>🍽️自备干粮·晚:图瓦火锅</td></tr>
+<tr><td>D4</td><td>🌅禾木全天</td><td class="km">60km</td><td>🚗</td><td>木屋×2¥880</td><td>¥719</td><td>禾木桥·白桦林·骑马·观景台日落·星空</td><td>🍽️午:村内简餐·晚:土火锅</td></tr>
+<tr><td>D5</td><td>🌅禾木→魔鬼城</td><td class="km">360km</td><td>🚗</td><td>乌尔禾×2¥440</td><td>¥457</td><td>禾木晨雾·布尔津·乌尔禾魔鬼城</td><td>🍽️午:布尔津拌面·晚:烤串·馕坑肉</td></tr>
+<tr><td>D6</td><td>🚗乌尔禾→奎屯</td><td class="km">250km</td><td>🚗</td><td>全季×2¥520</td><td>¥435</td><td>百里油田·中午到奎屯·下午休息补给</td><td>🍽️午:奎屯拌面·晚:椒麻鸡</td></tr>
+<tr><td>D7</td><td>🛣️独库→那拉提</td><td class="km">260km</td><td>🚗</td><td>柏納×2¥660</td><td>¥505</td><td>独库北段:天瀑·哈希勒根达坂·守望天山</td><td>🍽️午:乔尔玛服务区·晚:清炖羊肉</td></tr>
+<tr><td>D8</td><td>🏔️那拉提全天</td><td class="km">0km</td><td>—</td><td>柏納×2¥660</td><td>¥935</td><td>空中草原·游牧人家·骑马·盘龙谷道</td><td>🍽️午:游客中心·晚:烤馕·汤饭</td></tr>
+<tr><td>D9</td><td>🌿那拉提→喀拉峻→巩留</td><td class="km">250km</td><td>🚗</td><td>巩留H×2¥500</td><td>¥975</td><td>喀拉峻草原·鲜花台·猎鹰台·鳄鱼湾</td><td>🍽️午:特克斯拌面·晚:巩留夜市</td></tr>
+<tr><td>D10</td><td>💙巩留→赛湖→伊宁✈️</td><td class="km">280km</td><td>🚗+✈️</td><td>🏠回家</td><td>¥465</td><td>赛里木湖环湖90km·果子沟大桥·伊宁还车</td><td>🍽️午:赛湖路餐·机场简餐</td></tr>
+<tr style="font-weight:700;background:#f7fafc;border-top:2px solid var(--text)"><td colspan="6" style="text-align:right">🚗别克GL8¥420×9天+🏨8晚×2间+🎫+🍽️</td><td style="font-size:16px">≈¥20,050</td><td>/家庭</td></tr>
+</tbody></table></div></div>
+</div>
 
-  <!-- SINGLE -->
-  <div id="tab-single" class="tab-content active">
-    <div class="route-tabs">
-      <div class="route-tab a active" onclick="switchRoute('single','a')">🛫 方案A：伊宁进·乌市出</div>
-      <div class="route-tab b" onclick="switchRoute('single','b')">🛫 方案B：乌市进·伊宁出</div>
-    </div>
-    <div id="route-single-a" class="route-content active">
-      <div class="card full" style="margin-bottom:20px"><h3>🗺️ 方案A行程 · 伊宁进乌市出 · 哈弗大狗 · 1间/晚 · 总预算 ¥19,968</h3>
-        <table><thead><tr><th>天</th><th>行程</th><th>驾驶</th><th>交通</th><th>住宿</th><th>花费</th><th>景点安排</th><th>餐饮推荐</th></tr></thead><tbody>
-          <tr><td>D1</td><td>🛫 北京→伊宁</td><td class="km">5km</td><td>✈️+🚗</td><td>全季 ¥275</td><td>¥355</td><td>抵达伊宁·取车·六星街夜市</td><td>🍽️ 古兰丹姆冰淇淋·烤包子·面肺子</td></tr>
-          <tr><td>D2</td><td>💙 赛里木湖+果子沟</td><td class="km">300km</td><td>🚗</td><td>全季 ¥275</td><td>¥435</td><td>赛湖环湖90km（月亮湾·亲水滩·天鹅·S弯）·果子沟大桥·喀赞其</td><td>🍽️ 自备路餐（景区贵）·晚：喀赞其庭院餐厅（大盘鸡·手抓饭）</td></tr>
-          <tr><td>D3</td><td>🌿 特克斯+喀拉峻</td><td class="km">250km</td><td>🚗</td><td>巩留H ¥250</td><td>¥795</td><td>八卦城（无红绿灯）·喀拉峻草原（鲜花台·猎鹰台·鳄鱼湾·九曲十八弯）</td><td>🍽️ 午：特克斯拌面·晚：巩留夜市（烤串·手工酸奶）</td></tr>
-          <tr><td>D4</td><td>🏔️ 那拉提全天</td><td class="km">180km</td><td>🚗</td><td>柏納 ¥330</td><td>¥685</td><td>空中草原·游牧人家·骑马¥80/h·盘龙谷道·哈萨克家访</td><td>🍽️ 午：游客中心简餐·晚：清炖羊肉·野蘑菇面</td></tr>
-          <tr><td>D5</td><td>🛣️ 独库北段</td><td class="km">260km</td><td>🚗</td><td>全季 ¥260</td><td>¥450</td><td>乔尔玛烈士陵园·哈希勒根达坂（3400m摸雪）·天瀑·守望天山·老虎口</td><td>🍽️ 午：独山子拌面·晚：奎屯美食街（椒麻鸡·丸子汤）</td></tr>
-          <tr><td>D6</td><td>🏜️ 魔鬼城→布尔津</td><td class="km warn">450km</td><td>🚗</td><td>松果 ¥260</td><td>¥502</td><td>乌尔禾魔鬼城（雅丹·小火车）·百里油田·布尔津河堤夜市</td><td>🍽️ 午：乌尔禾拌面·晚：🔥烤狗鱼·卡瓦斯·俄罗斯列巴</td></tr>
-          <tr><td>D7</td><td>🏞️ 喀纳斯</td><td class="km">140km</td><td>🚗</td><td>苏豪 ¥340</td><td>¥765</td><td>贾登峪换乘·观鱼台（1068级台阶）·湖边栈道·三湾徒步（月亮湾→卧龙湾）</td><td>🍽️ 自备干粮·晚：贾登峪美食街（图瓦火锅·风干牛肉）</td></tr>
-          <tr><td>D8</td><td>🌅 禾木村</td><td class="km">60km</td><td>🚗</td><td>木屋 ¥440</td><td>¥630</td><td>禾木桥·白桦林·骑马美丽峰¥200·登观景台看日落炊烟（20:30）·星空</td><td>🍽️ 午：村内简餐·晚：小木屋餐厅（土火锅·烤羊排·奶疙瘩）</td></tr>
-          <tr><td>D9</td><td>🌅 禾木晨雾→福海</td><td class="km">280km</td><td>🚗</td><td>帝苑 ¥250</td><td>¥390</td><td>禾木晨雾（6:30日出前）·布尔津午餐·福海乌伦古湖（戈壁大海·日落）</td><td>🍽️ 午：布尔津拌面·晚：🔥福海冷水鱼宴（狗鱼·五道黑）</td></tr>
-          <tr><td>D10</td><td>🏠 福海→乌市✈️</td><td class="km">380km</td><td>🚗+✈️</td><td>🏠回家</td><td>¥300</td><td>S21沙漠公路·古尔班通古特沙漠·风力发电矩阵·大巴扎补货</td><td>🍽️ 午：乌市楼兰秘烤/血站大盘鸡</td></tr>
-          <tr style="font-weight:700;background:#f7fafc;border-top:2px solid var(--text)"><td colspan="6" style="text-align:right">🚗 哈弗大狗 ¥230×9天 + 🏨 8晚 + 🎫 门票 + 🍽️ 餐饮</td><td style="color:var(--green);font-size:16px">≈¥19,968</td><td>✅ 预算内</td></tr>
-        </tbody></table></div>
-    </div>
-    <div id="route-single-b" class="route-content">
-      <div class="card full" style="margin-bottom:20px"><h3>🗺️ 方案B行程 · 乌市进伊宁出 · 哈弗大狗 · 1间/晚 · 预算 ≈¥19,800</h3>
-        <table><thead><tr><th>天</th><th>行程</th><th>驾驶</th><th>交通</th><th>住宿</th><th>花费</th><th>景点安排</th><th>餐饮推荐</th></tr></thead><tbody>
-          <tr><td>D1</td><td>🛫 北京→乌鲁木齐</td><td class="km">10km</td><td>✈️+🚗</td><td>全季 ¥280</td><td>¥360</td><td>抵达乌市·取车·国际大巴扎·红山公园</td><td>🍽️ 楼兰秘烤·烤包子·大盘鸡·格瓦斯</td></tr>
-          <tr><td>D2</td><td>🏜️ S21沙漠公路→福海</td><td class="km">380km</td><td>🚗</td><td>帝苑 ¥250</td><td>¥390</td><td>S21阿乌高速·沙漠观景台·福海乌伦古湖（戈壁大海·日落）</td><td>🍽️ 午：服务区简餐·晚：🔥冷水鱼宴</td></tr>
-          <tr><td>D3</td><td>🌊 福海→喀纳斯</td><td class="km">260km</td><td>🚗</td><td>苏豪 ¥340</td><td>¥765</td><td>贾登峪换乘·观鱼台1068台阶·湖边栈道·三湾（月亮湾→卧龙湾）</td><td>🍽️ 自备干粮·晚：图瓦火锅·风干牛肉</td></tr>
-          <tr><td>D4</td><td>🌅 禾木全天</td><td class="km">60km</td><td>🚗</td><td>木屋 ¥440</td><td>¥630</td><td>禾木桥·白桦林·骑马美丽峰·登观景台看日落炊烟·星空</td><td>🍽️ 午：村内简餐·晚：土火锅·烤羊排</td></tr>
-          <tr><td>D5</td><td>🌅 禾木晨雾→魔鬼城</td><td class="km">360km</td><td>🚗</td><td>乌尔禾 ¥220</td><td>¥442</td><td>禾木晨雾（6:30）·布尔津午餐·乌尔禾魔鬼城（雅丹·小火车）</td><td>🍽️ 午：布尔津拌面·晚：烤串·馕坑肉</td></tr>
-          <tr><td>D6</td><td>🚗 乌尔禾→奎屯休整</td><td class="km">250km</td><td>🚗</td><td>全季 ¥260</td><td>¥380</td><td>上午出发·百里油田·中午到奎屯·下午休息补给·逛市区</td><td>🍽️ 午：奎屯拌面·晚：椒麻鸡·胡辣羊蹄</td></tr>
-          <tr><td>D7</td><td>🛣️ 独库北段→那拉提</td><td class="km">260km</td><td>🚗</td><td>柏納 ¥330</td><td>¥520</td><td>独库北段：天瀑·哈希勒根达坂3400m·守望天山·乔尔玛</td><td>🍽️ 午：乔尔玛服务区·晚：清炖羊肉</td></tr>
-          <tr><td>D8</td><td>🏔️ 那拉提草原全天</td><td class="km">0km</td><td>—</td><td>柏納 ¥330</td><td>¥685</td><td>空中草原·游牧人家·骑马¥80/h·盘龙谷道·哈萨克家访</td><td>🍽️ 午：游客中心·晚：烤馕·汤饭</td></tr>
-          <tr><td>D9</td><td>🌿 那拉提→喀拉峻→巩留</td><td class="km">250km</td><td>🚗</td><td>巩留H ¥250</td><td>¥795</td><td>喀拉峻草原（鲜花台·猎鹰台·鳄鱼湾·人体草原）·巩留</td><td>🍽️ 午：特克斯拌面·晚：巩留夜市·酸奶</td></tr>
-          <tr><td>D10</td><td>💙 巩留→赛湖→伊宁✈️</td><td class="km">280km</td><td>🚗+✈️</td><td>🏠回家</td><td>¥445</td><td>赛里木湖环湖90km·果子沟大桥·伊宁还车·飞回北京</td><td>🍽️ 午：赛湖路餐·伊宁机场简餐</td></tr>
-          <tr style="font-weight:700;background:#f7fafc;border-top:2px solid var(--text)"><td colspan="6" style="text-align:right">🚗 哈弗大狗 ¥230/天×9天 + 🏨 8晚 + 🎫 门票 + 🍽️ 餐饮</td><td style="color:var(--green);font-size:16px">≈¥19,800</td><td>✅ 预算内</td></tr>
-        </tbody></table></div>
-    </div>
-  </div>
+<!-- SHARED SECTIONS -->
+<div class="grid" style="margin-top:24px">
+<div class="card"><h3>📅关键时间线</h3><div class="timeline">
+<div class="tl-item done"><div class="tl-date">✅已完成</div><div class="tl-text">Excel+预算+仪表板</div></div>
+<div class="tl-item done"><div class="tl-date">✅已完成</div><div class="tl-text">蹲票系统4次/天+API推送</div></div>
+<div class="tl-item next"><div class="tl-date">📱立即</div><div class="tl-text"><strong>携程+去哪儿设价格提醒×4航线</strong></div></div>
+<div class="tl-item"><div class="tl-date">7月8日</div><div class="tl-text">🔔海航会员日</div></div>
+<div class="tl-item"><div class="tl-date">7月15日</div><div class="tl-text">🔔国航会员日→关键</div></div>
+<div class="tl-item"><div class="tl-date">7月18日</div><div class="tl-text">🔔东航会员日</div></div>
+<div class="tl-item"><div class="tl-date">7月25日前</div><div class="tl-text">⚠️最晚出票日</div></div>
+<div class="tl-item"><div class="tl-date">7月28日</div><div class="tl-text">🔔南航会员日→最重要</div></div>
+<div class="tl-item"><div class="tl-date">8月初</div><div class="tl-text">订酒店+独库预约</div></div>
+<div class="tl-item"><div class="tl-date">8月21日</div><div class="tl-text">✈️出发！</div></div>
+</div></div>
+<div class="card"><h3>🏨住宿清单</h3><table><thead><tr><th>城市</th><th>全季?</th><th>推荐酒店</th><th>¥/晚</th></tr></thead><tbody>
+<tr><td>伊宁</td><td>✅</td><td>全季(北京路店)</td><td>¥275</td></tr>
+<tr><td>巩留</td><td>❌</td><td>巩留H酒店</td><td>¥250</td></tr>
+<tr><td>那拉提</td><td>❌</td><td>柏納酒店(华住)</td><td>¥330</td></tr>
+<tr><td>奎屯</td><td>✅</td><td>全季(乌苏街)</td><td>¥260</td></tr>
+<tr><td>布尔津</td><td>❌</td><td>新旅松果</td><td>¥260</td></tr>
+<tr><td>贾登峪</td><td>❌</td><td>苏豪酒店</td><td>¥340</td></tr>
+<tr><td>禾木</td><td>❌</td><td>百年老屋民宿⚠️</td><td>¥440</td></tr>
+<tr><td>福海</td><td>❌</td><td>福海帝苑</td><td>¥250</td></tr>
+<tr><td>乌市</td><td>✅</td><td>全季(友好路)</td><td>¥280</td></tr>
+</tbody></table></div>
+</div>
 
-  <!-- DOUBLE -->
-  <div id="tab-double" class="tab-content">
-    <div class="route-tabs">
-      <div class="route-tab a active" onclick="switchRoute('double','a')">🛫 方案A：伊宁进·乌市出</div>
-      <div class="route-tab b" onclick="switchRoute('double','b')">🛫 方案B：乌市进·伊宁出</div>
-    </div>
-    <div id="route-double-a" class="route-content active">
-      <div class="card full" style="margin-bottom:20px"><h3>🗺️ 方案A行程 · 伊宁进乌市出 · GL8 · 2间/晚 · 总计 ¥40,276（每家庭 ¥20,138）</h3>
-        <table><thead><tr><th>天</th><th>行程</th><th>驾驶</th><th>交通</th><th>住宿</th><th>花费/家庭</th><th>景点安排</th><th>餐饮推荐</th></tr></thead><tbody>
-          <tr><td>D1</td><td>🛫 北京→伊宁</td><td class="km">5km</td><td>✈️+🚗</td><td>全季×2 ¥550</td><td>¥450</td><td>抵达伊宁·取车·六星街夜市</td><td>🍽️ 古兰丹姆冰淇淋·烤包子·面肺子</td></tr>
-          <tr><td>D2</td><td>💙 赛里木湖+果子沟</td><td class="km">300km</td><td>🚗</td><td>全季×2 ¥550</td><td>¥559</td><td>赛湖环湖90km·果子沟大桥·喀赞其</td><td>🍽️ 午：自备路餐·晚：喀赞其庭院餐厅</td></tr>
-          <tr><td>D3</td><td>🌿 特克斯+喀拉峻</td><td class="km">250km</td><td>🚗</td><td>巩留H×2 ¥500</td><td>¥975</td><td>喀拉峻草原·鲜花台·猎鹰台·鳄鱼湾</td><td>🍽️ 午：特克斯拌面·晚：巩留夜市</td></tr>
-          <tr><td>D4</td><td>🏔️ 那拉提全天</td><td class="km">180km</td><td>🚗</td><td>柏納×2 ¥660</td><td>¥935</td><td>空中草原·游牧人家·骑马·盘龙谷道</td><td>🍽️ 午：游客中心·晚：烤馕·汤饭</td></tr>
-          <tr><td>D5</td><td>🛣️ 独库北段</td><td class="km">260km</td><td>🚗</td><td>全季×2 ¥520</td><td>¥465</td><td>乔尔玛·哈希勒根达坂3400m·天瀑·守望天山</td><td>🍽️ 午：独山子拌面·晚：椒麻鸡·丸子汤</td></tr>
-          <tr><td>D6</td><td>🏜️ 魔鬼城→布尔津</td><td class="km warn">450km</td><td>🚗</td><td>松果×2 ¥520</td><td>¥740</td><td>乌尔禾魔鬼城·百里油田·布尔津河堤夜市</td><td>🍽️ 午：乌尔禾拌面·晚：🔥烤狗鱼·卡瓦斯</td></tr>
-          <tr><td>D7</td><td>🏞️ 喀纳斯</td><td class="km">140km</td><td>🚗</td><td>苏豪×2 ¥680</td><td>¥1,365</td><td>贾登峪换乘·观鱼台·湖边栈道·三湾徒步</td><td>🍽️ 自备干粮·晚：图瓦火锅·风干牛肉</td></tr>
-          <tr><td>D8</td><td>🌅 禾木村</td><td class="km">60km</td><td>🚗</td><td>木屋×2 ¥880</td><td>¥719</td><td>禾木桥·白桦林·骑马·观景台日落·星空</td><td>🍽️ 午：村内简餐·晚：土火锅·烤羊排</td></tr>
-          <tr><td>D9</td><td>🌅 禾木晨雾→福海</td><td class="km">280km</td><td>🚗</td><td>帝苑×2 ¥500</td><td>¥425</td><td>百里油田·中午到奎屯·下午休息补给</td><td>🍽️ 午：奎屯拌面·晚：椒麻鸡·胡辣羊蹄</td></tr>
-          <tr><td>D10</td><td>🏠 福海→乌市✈️</td><td class="km">380km</td><td>🚗+✈️</td><td>🏠回家</td><td>¥455</td><td>抵达乌市·取车·国际大巴扎·红山公园</td><td>🍽️ 楼兰秘烤·烤包子·大盘鸡</td></tr>
-          <tr style="font-weight:700;background:#f7fafc;border-top:2px solid var(--text)"><td colspan="6" style="text-align:right">🚗 别克GL8 ¥420/天×9天 + 🏨 8晚×2间 + 🎫 门票 + 🍽️</td><td style="font-size:16px">≈¥20,138</td></tr>
-        </tbody></table></div>
-    </div>
-    <div id="route-double-b" class="route-content">
-      <div class="card full" style="margin-bottom:20px"><h3>🗺️ 方案B行程 · 乌市进伊宁出 · GL8 · 2间/晚 · 总计 ≈¥40,100（每家庭 ≈¥20,050）</h3>
-        <table><thead><tr><th>天</th><th>行程</th><th>驾驶</th><th>交通</th><th>住宿</th><th>花费/家庭</th><th>景点安排</th><th>餐饮推荐</th></tr></thead><tbody>
-          <tr><td>D1</td><td>🛫 北京→乌鲁木齐</td><td class="km">10km</td><td>✈️+🚗</td><td>全季×2 ¥560</td><td>¥175</td><td>S21沙漠公路·大巴扎补货</td><td>🍽️ 午：楼兰秘烤/血站大盘鸡</td></tr>
-          <tr><td>D2</td><td>🏜️ S21→福海</td><td class="km">380km</td><td>🚗</td><td>帝苑×2 ¥500</td><td>¥425</td><td>S21阿乌高速·沙漠观景台·福海乌伦古湖日落</td><td>🍽️ 午：服务区简餐·晚：🔥冷水鱼宴</td></tr>
-          <tr><td>D3</td><td>🌊 福海→喀纳斯</td><td class="km">260km</td><td>🚗</td><td>苏豪×2 ¥680</td><td>¥1,365</td><td>贾登峪换乘·观鱼台·湖边栈道·三湾徒步</td><td>🍽️ 自备干粮·晚：图瓦火锅·风干牛肉</td></tr>
-          <tr><td>D4</td><td>🌅 禾木全天</td><td class="km">60km</td><td>🚗</td><td>木屋×2 ¥880</td><td>¥719</td><td>禾木桥·白桦林·骑马·观景台日落·星空</td><td>🍽️ 午：村内简餐·晚：土火锅·烤羊排</td></tr>
-          <tr><td>D5</td><td>🌅 禾木→魔鬼城</td><td class="km">360km</td><td>🚗</td><td>乌尔禾×2 ¥440</td><td>¥457</td><td>禾木晨雾·布尔津·乌尔禾魔鬼城</td><td>🍽️ 午：布尔津拌面·晚：烤串·馕坑肉</td></tr>
-          <tr><td>D6</td><td>🚗 乌尔禾→奎屯</td><td class="km">250km</td><td>🚗</td><td>全季×2 ¥520</td><td>¥640</td><td>禾木晨雾·布尔津·福海乌伦古湖日落</td><td>🍽️ 午：布尔津拌面·晚：🔥冷水鱼宴</td></tr>
-          <tr><td>D7</td><td>🛣️ 独库→那拉提</td><td class="km">260km</td><td>🚗</td><td>柏納×2 ¥660</td><td>¥520</td><td>独库北段：天瀑·哈希勒根达坂·守望天山</td><td>🍽️ 午：乔尔玛服务区·晚：清炖羊肉</td></tr>
-          <tr><td>D8</td><td>🏔️ 那拉提全天</td><td class="km">0km</td><td>—</td><td>柏納×2 ¥660</td><td>¥935</td><td>空中草原·游牧人家·骑马·盘龙谷道·哈萨克家访</td><td>🍽️ 午：游客中心·晚：清炖羊肉·野蘑菇面</td></tr>
-          <tr><td>D9</td><td>🌿 那拉提→喀拉峻→巩留</td><td class="km">250km</td><td>🚗</td><td>巩留H×2 ¥500</td><td>¥975</td><td>八卦城·喀拉峻草原·鲜花台·猎鹰台·鳄鱼湾</td><td>🍽️ 午：特克斯拌面·晚：巩留夜市</td></tr>
-          <tr><td>D10</td><td>💙 巩留→赛湖→伊宁✈️</td><td class="km">280km</td><td>🚗+✈️</td><td>🏠回家</td><td>¥465</td><td>赛里木湖环湖90km·果子沟大桥·伊宁还车</td><td>🍽️ 午：赛湖路餐·伊宁机场简餐</td></tr>
-          <tr style="font-weight:700;background:#f7fafc;border-top:2px solid var(--text)"><td colspan="6" style="text-align:right">🚗 别克GL8 ¥420/天×9天 + 🏨 8晚×2间 + 🎫 门票 + 🍽️</td><td style="font-size:16px">≈¥20,050</td></tr>
-        </tbody></table></div>
-    </div>
-  </div>
+<div class="card full" style="margin-bottom:24px"><h3>📐日期组合·9组</h3>
+<table><thead><tr><th>#</th><th>去程</th><th>返程</th><th>天</th><th>推荐</th><th>方案A</th><th>方案B</th></tr></thead><tbody>
+<tr style="background:#fefcbf"><td><strong>8</strong></td><td><strong>8/21周五</strong></td><td><strong>8/30周日</strong></td><td><strong>9</strong></td><td>⭐⭐⭐⭐⭐</td><td>伊宁→乌市</td><td>乌市→伊宁</td></tr>
+<tr><td>7</td><td>8/20周四</td><td>8/30周日</td><td>10</td><td>⭐⭐⭐⭐</td><td>伊宁→乌市</td><td>乌市→伊宁</td></tr>
+<tr><td>9</td><td>8/21周五</td><td>8/31周一</td><td>10</td><td>⭐⭐⭐⭐</td><td>伊宁→乌市</td><td>乌市→伊宁</td></tr>
+<tr><td>6</td><td>8/14周五</td><td>8/24周一</td><td>10</td><td>⭐⭐⭐⭐</td><td>伊宁→乌市</td><td>乌市→伊宁</td></tr>
+<tr><td>3</td><td>8/7周五</td><td>8/17周一</td><td>10</td><td>⭐⭐⭐</td><td>伊宁→乌市</td><td>乌市→伊宁</td></tr>
+<tr><td>4</td><td>8/13周四</td><td>8/23周日</td><td>10</td><td>⭐⭐⭐</td><td>伊宁→乌市</td><td>乌市→伊宁</td></tr>
+<tr><td>5</td><td>8/14周五</td><td>8/23周日</td><td>9</td><td>⭐⭐⭐</td><td>伊宁→乌市</td><td>乌市→伊宁</td></tr>
+<tr><td>1</td><td>8/6周四</td><td>8/16周日</td><td>10</td><td>⭐⭐</td><td>伊宁→乌市</td><td>乌市→伊宁</td></tr>
+<tr><td>2</td><td>8/7周五</td><td>8/16周日</td><td>9</td><td>⭐⭐</td><td>伊宁→乌市</td><td>乌市→伊宁</td></tr>
+</tbody></table></div>
 
-  <!-- SHARED SECTIONS -->
-  <div class="grid" style="margin-top:24px">
-    <div class="card"><h3>📅 关键时间线</h3><div class="timeline">
-      <div class="tl-item done"><div class="tl-date">✅ 已完成</div><div class="tl-text">Excel + 预算 + 仪表板</div></div>
-      <div class="tl-item done"><div class="tl-date">✅ 已完成</div><div class="tl-text">蹲票系统 4次/天 + API推送</div></div>
-      <div class="tl-item next"><div class="tl-date">📱 立即</div><div class="tl-text"><strong>携程+去哪儿设价格提醒×4航线</strong></div></div>
-      <div class="tl-item"><div class="tl-date">7月8日</div><div class="tl-text">🔔 海航会员日</div></div>
-      <div class="tl-item"><div class="tl-date">7月15日</div><div class="tl-text">🔔 国航会员日→关键</div></div>
-      <div class="tl-item"><div class="tl-date">7月18日</div><div class="tl-text">🔔 东航会员日</div></div>
-      <div class="tl-item"><div class="tl-date">7月25日前</div><div class="tl-text">⚠️ 最晚出票日</div></div>
-      <div class="tl-item"><div class="tl-date">7月28日</div><div class="tl-text">🔔 南航会员日→最重要</div></div>
-      <div class="tl-item"><div class="tl-date">8月初</div><div class="tl-text">订酒店+独库预约</div></div>
-      <div class="tl-item"><div class="tl-date">8月21日</div><div class="tl-text">✈️ 出发！</div></div>
-    </div></div>
-    <div class="card"><h3>🏨 住宿清单</h3><table><thead><tr><th>城市</th><th>全季?</th><th>推荐酒店</th><th>¥/晚</th></tr></thead><tbody>
-      <tr><td>伊宁</td><td>✅</td><td>全季(北京路店)</td><td>¥275</td></tr>
-      <tr><td>巩留</td><td>❌</td><td>巩留H酒店</td><td>¥250</td></tr>
-      <tr><td>那拉提</td><td>❌</td><td>柏納酒店(华住)</td><td>¥330</td></tr>
-      <tr><td>奎屯</td><td>✅</td><td>全季(乌苏街)</td><td>¥260</td></tr>
-      <tr><td>布尔津</td><td>❌</td><td>新旅松果</td><td>¥260</td></tr>
-      <tr><td>贾登峪</td><td>❌</td><td>苏豪酒店</td><td>¥340</td></tr>
-      <tr><td>禾木</td><td>❌</td><td>百年老屋民宿⚠️</td><td>¥440</td></tr>
-      <tr><td>福海</td><td>❌</td><td>福海帝苑</td><td>¥250</td></tr>
-      <tr><td>乌市</td><td>✅</td><td>全季(友好路)</td><td>¥280</td></tr>
-    </tbody></table></div>
-  </div>
-
-  <div class="card full" style="margin-bottom:24px"><h3>📐 日期组合 · 9组</h3>
-    <table><thead><tr><th>#</th><th>去程</th><th>返程</th><th>天</th><th>推荐</th><th>方案A</th><th>方案B</th></tr></thead><tbody>
-      <tr style="background:#fefcbf"><td><strong>8</strong></td><td><strong>8/21周五</strong></td><td><strong>8/30周日</strong></td><td><strong>9</strong></td><td>⭐⭐⭐⭐⭐</td><td>伊宁→乌市</td><td>乌市→伊宁</td></tr>
-      <tr><td>7</td><td>8/20周四</td><td>8/30周日</td><td>10</td><td>⭐⭐⭐⭐</td><td>伊宁→乌市</td><td>乌市→伊宁</td></tr>
-      <tr><td>9</td><td>8/21周五</td><td>8/31周一</td><td>10</td><td>⭐⭐⭐⭐</td><td>伊宁→乌市</td><td>乌市→伊宁</td></tr>
-      <tr><td>6</td><td>8/14周五</td><td>8/24周一</td><td>10</td><td>⭐⭐⭐⭐</td><td>伊宁→乌市</td><td>乌市→伊宁</td></tr>
-      <tr><td>3</td><td>8/7周五</td><td>8/17周一</td><td>10</td><td>⭐⭐⭐</td><td>伊宁→乌市</td><td>乌市→伊宁</td></tr>
-      <tr><td>4</td><td>8/13周四</td><td>8/23周日</td><td>10</td><td>⭐⭐⭐</td><td>伊宁→乌市</td><td>乌市→伊宁</td></tr>
-      <tr><td>5</td><td>8/14周五</td><td>8/23周日</td><td>9</td><td>⭐⭐⭐</td><td>伊宁→乌市</td><td>乌市→伊宁</td></tr>
-      <tr><td>1</td><td>8/6周四</td><td>8/16周日</td><td>10</td><td>⭐⭐</td><td>伊宁→乌市</td><td>乌市→伊宁</td></tr>
-      <tr><td>2</td><td>8/7周五</td><td>8/16周日</td><td>9</td><td>⭐⭐</td><td>伊宁→乌市</td><td>乌市→伊宁</td></tr>
-    </tbody></table></div>
-
-  <div class="card full" style="margin-bottom:24px"><h3>📋 蹲票日志</h3>
-    <table><thead><tr><th>时间</th><th>航线</th><th>最低价</th><th>vs目标</th><th>备注</th></tr></thead><tbody>
-      <tr><td>07/03 13:07</td><td>北京→伊宁</td><td>¥1,000-1,100</td><td><span class="tag near">⚠️ 差¥150-250</span></td><td>南航2班/天</td></tr>
-      <tr><td>07/03 13:07</td><td>乌鲁木齐→北京</td><td>¥750-1,000</td><td><span class="tag good">🟢 已达标</span></td><td>10+班/天</td></tr>
-      <tr><td>07/03 13:07</td><td>北京→阿勒泰</td><td>¥1,900-2,100</td><td><span class="tag high">❌ 放弃</span></td><td>旺季贵</td></tr><tr><td>2026-07-03 15:46</td><td>v4.0 分段连线环线地图</td></tr>
-    <tr><td>2026-07-03 15:52</td><td>v4.1 卡片信息揉进行程表</td></tr>
-    <tr><td>2026-07-03 15:53</td><td>v4.1 修复orphan table rows</td></tr>
-    <tr><td>2026-07-03 15:54</td><td>v4.1 修复重复tabs+orphan rows</td></tr>
-    <tr><td>2026-07-03 15:56</td><td>v4.2 单家庭PlanA展开景点+餐饮</td></tr>
-    <tr><td>2026-07-03 15:59</td><td>v4.3 四张表全展开·景点+餐饮</td></tr>
-    <tr><td>2026-07-03 16:02</td><td>v4.4 日花费按实际预算重算</td></tr>
+<div class="card full" style="margin-bottom:24px"><h3>📋蹲票日志</h3>
+<table><thead><tr><th>时间</th><th>航线</th><th>最低价</th><th>vs目标</th><th>备注</th></tr></thead><tbody>
+<tr><td>07/03 13:07</td><td>北京→伊宁</td><td>¥1,000-1,100</td><td><span class="tag near">⚠️差¥150-250</span></td><td>南航2班/天</td></tr>
+<tr><td>07/03 13:07</td><td>乌鲁木齐→北京</td><td>¥750-1,000</td><td><span class="tag good">🟢已达标</span></td><td>10+班/天</td></tr>
+<tr><td>07/03 13:07</td><td>北京→阿勒泰</td><td>¥1,900-2,100</td><td><span class="tag high">❌放弃</span></td><td>旺季贵</td></tr><tr><td>2026-07-03 16:11</td><td>v5.0 层级重构·方案A/B顶层→家庭子级</td></tr>
     <!-- LOG_INSERT --></tbody></table></div>
 
-  <div class="footer">蹲票Cron：1:13·8:43·13:07·22:17 | 会员日：7/8 7/15 7/18 7/28 | API推送·GitHub Pages</div>
+<div class="footer">蹲票Cron:1:13·8:43·13:07·22:17 | 会员日:7/8 7/15 7/18 7/28 | API推送·GitHub Pages</div>
 </div>
 
 <script>
-function switchMaster(n){document.querySelectorAll('.master-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));document.querySelector(`.master-tab[onclick*="${n}"]`).classList.add('active');document.getElementById('tab-'+n).classList.add('active');}
-function switchRoute(f,r){document.querySelectorAll(`#tab-${f} .route-tab`).forEach(t=>t.classList.remove('active'));document.querySelectorAll(`#tab-${f} .route-content`).forEach(c=>c.classList.remove('active'));document.querySelector(`#tab-${f} .route-tab.${r}`).classList.add('active');document.getElementById(`route-${f}-${r}`).classList.add('active');}
+function switchRoute(r){document.querySelectorAll('.route-main-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.route-content').forEach(c=>c.classList.remove('active'));document.querySelector('.route-main-tab.'+r).classList.add('active');document.getElementById('route-'+r).classList.add('active')}
+function switchFamily(route,fam){document.querySelectorAll('#route-'+route+' .family-sub-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('#route-'+route+' .family-content').forEach(c=>c.classList.remove('active'));document.querySelector('#route-'+route+' .family-sub-tab[onclick*="'+fam+'"]').classList.add('active');document.getElementById('fam-'+route+'-'+fam).classList.add('active')}
 setTimeout(function(){location.reload()},300000);
 document.getElementById('lastUpdate').textContent=new Date().toLocaleString('zh-CN',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
 </script>
