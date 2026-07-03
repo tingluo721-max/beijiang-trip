@@ -114,8 +114,65 @@
       <div class="route-tab b" onclick="switchRoute('single','b')">🛫 <strong>方案B：乌市进 · 伊宁出</strong> · 10天 · 顺时针</div>
     </div>
 
-    <!-- Plan A -->
+    <!-- Plan A Map -->
     <div id="route-single-a" class="route-content active">
+      <div class="card full" style="padding:16px 20px;margin-bottom:16px">
+        <h3>🗺️ 方案A路线图 · 伊宁进→乌市出（逆时针环线）</h3>
+        <svg viewBox="0 0 780 480" style="width:100%;height:auto;font-family:-apple-system,sans-serif">
+          <defs>
+            <linearGradient id="gradA" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#2b6cb0"/><stop offset="50%" stop-color="#48bb78"/><stop offset="100%" stop-color="#e53e3e"/></linearGradient>
+            <filter id="shadow"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.15"/></filter>
+          </defs>
+          <!-- Background -->
+          <rect x="0" y="0" width="780" height="480" rx="12" fill="#fafcfd"/>
+          <!-- Province outline hint -->
+          <path d="M40,380 Q60,350 100,340 Q140,320 200,350 Q280,340 350,360 Q420,340 500,300 Q580,200 650,150 Q700,120 730,180 Q740,250 720,340 Q680,390 600,420 Q400,460 200,440 Q80,420 40,380Z" fill="#f0f4f8" stroke="#dce4ec" stroke-width="1" stroke-dasharray="6,3"/>
+          <!-- Route path (curved) -->
+          <path d="M160,350 Q140,310 130,290 Q200,260 200,240 Q240,300 280,340 Q340,320 370,280 Q420,240 460,220 Q500,180 560,160 Q620,130 660,140 Q680,160 670,200 Q660,250 630,280 Q570,340 500,370 Q440,400 380,430 Q320,440 260,420 Q200,400 160,350Z" fill="none" stroke="url(#gradA)" stroke-width="4" stroke-linecap="round" filter="url(#shadow)"/>
+          <!-- Arrow indicators -->
+          <circle cx="200" cy="140" r="3" fill="#2b6cb0"/><circle cx="280" cy="340" r="3" fill="#3182ce"/><circle cx="370" cy="280" r="3" fill="#38a169"/><circle cx="500" cy="180" r="3" fill="#e53e3e"/><circle cx="660" cy="140" r="3" fill="#e53e3e"/><circle cx="630" cy="280" r="3" fill="#dd6b20"/><circle cx="380" cy="430" r="3" fill="#3182ce"/>
+          <!-- Stops -->
+          <!-- D1: 伊宁 -->
+          <circle cx="160" cy="350" r="20" fill="#2b6cb0" stroke="white" stroke-width="3" filter="url(#shadow)"/><text x="160" y="355" text-anchor="middle" fill="white" font-size="11" font-weight="700">D1</text>
+          <text x="160" y="382" text-anchor="middle" fill="#2d3748" font-size="11" font-weight="600">伊宁</text>
+          <!-- D2: 赛里木湖 -->
+          <circle cx="130" cy="290" r="18" fill="#3182ce" stroke="white" stroke-width="3" filter="url(#shadow)"/><text x="130" y="295" text-anchor="middle" fill="white" font-size="11" font-weight="700">D2</text>
+          <text x="100" y="275" text-anchor="middle" fill="#2d3748" font-size="10" font-weight="600">赛里木湖</text>
+          <!-- D3: 喀拉峻 -->
+          <circle cx="230" cy="370" r="18" fill="#38a169" stroke="white" stroke-width="3" filter="url(#shadow)"/><text x="230" y="375" text-anchor="middle" fill="white" font-size="11" font-weight="700">D3</text>
+          <text x="230" y="402" text-anchor="middle" fill="#2d3748" font-size="10" font-weight="600">喀拉峻</text>
+          <!-- D4: 那拉提 -->
+          <circle cx="330" cy="385" r="18" fill="#38a169" stroke="white" stroke-width="3" filter="url(#shadow)"/><text x="330" y="390" text-anchor="middle" fill="white" font-size="11" font-weight="700">D4</text>
+          <text x="330" y="417" text-anchor="middle" fill="#2d3748" font-size="10" font-weight="600">那拉提</text>
+          <!-- D5: 独库+奎屯 -->
+          <circle cx="440" cy="270" r="20" fill="#ecc94b" stroke="white" stroke-width="3" filter="url(#shadow)"/><text x="440" y="275" text-anchor="middle" fill="white" font-size="11" font-weight="700">D5</text>
+          <text x="440" y="302" text-anchor="middle" fill="#2d3748" font-size="10" font-weight="600">独库+奎屯</text>
+          <!-- D6: 魔鬼城+布尔津 -->
+          <circle cx="560" cy="160" r="20" fill="#dd6b20" stroke="white" stroke-width="3" filter="url(#shadow)"/><text x="560" y="165" text-anchor="middle" fill="white" font-size="11" font-weight="700">D6</text>
+          <text x="560" y="192" text-anchor="middle" fill="#2d3748" font-size="10" font-weight="600">魔鬼城→布尔津</text>
+          <!-- D7: 喀纳斯 -->
+          <circle cx="660" cy="100" r="18" fill="#e53e3e" stroke="white" stroke-width="3" filter="url(#shadow)"/><text x="660" y="105" text-anchor="middle" fill="white" font-size="11" font-weight="700">D7</text>
+          <text x="660" y="132" text-anchor="middle" fill="#2d3748" font-size="10" font-weight="600">喀纳斯</text>
+          <!-- D8: 禾木 -->
+          <circle cx="690" cy="150" r="18" fill="#e53e3e" stroke="white" stroke-width="3" filter="url(#shadow)"/><text x="690" y="155" text-anchor="middle" fill="white" font-size="11" font-weight="700">D8</text>
+          <text x="710" y="140" text-anchor="start" fill="#2d3748" font-size="10" font-weight="600">禾木</text>
+          <!-- D9: 福海 -->
+          <circle cx="650" cy="230" r="18" fill="#ed8936" stroke="white" stroke-width="3" filter="url(#shadow)"/><text x="650" y="235" text-anchor="middle" fill="white" font-size="11" font-weight="700">D9</text>
+          <text x="650" y="262" text-anchor="middle" fill="#2d3748" font-size="10" font-weight="600">福海</text>
+          <!-- D10: 乌鲁木齐 -->
+          <circle cx="630" cy="340" r="22" fill="#c53030" stroke="white" stroke-width="3" filter="url(#shadow)"/><text x="630" y="345" text-anchor="middle" fill="white" font-size="11" font-weight="700">D10</text>
+          <text x="630" y="375" text-anchor="middle" fill="#c53030" font-size="12" font-weight="700">✈️ 乌市返京</text>
+          <!-- Legend -->
+          <rect x="20" y="20" width="180" height="70" rx="8" fill="white" stroke="#e2e8f0" stroke-width="1"/>
+          <text x="35" y="40" font-size="10" font-weight="700" fill="#2d3748">🗺️ 逆时针环线</text>
+          <line x1="35" y1="52" x2="65" y2="52" stroke="#2b6cb0" stroke-width="3" stroke-linecap="round"/>
+          <text x="72" y="56" font-size="9" fill="#718096">草原段（伊犁）</text>
+          <line x1="35" y1="68" x2="65" y2="68" stroke="#e53e3e" stroke-width="3" stroke-linecap="round"/>
+          <text x="72" y="72" font-size="9" fill="#718096">喀纳斯段（阿勒泰）</text>
+          <line x1="120" y1="68" x2="150" y2="68" stroke="#dd6b20" stroke-width="3" stroke-linecap="round"/>
+          <text x="157" y="72" font-size="9" fill="#718096">返程段</text>
+        </svg>
+      </div>
       <div class="cards-3">
         <div class="stat-card"><div class="label">🚗 车型</div><div class="value">哈弗大狗</div><div class="sub">紧凑SUV · ¥230/天</div></div>
         <div class="stat-card"><div class="label">🏨 住宿</div><div class="value">1间/晚</div><div class="sub">8晚 · ¥2,460</div></div>
@@ -143,6 +200,59 @@
 
     <!-- Plan B -->
     <div id="route-single-b" class="route-content">
+      <div class="card full" style="padding:16px 20px;margin-bottom:16px">
+        <h3>🗺️ 方案B路线图 · 乌市进→伊宁出（顺时针环线）</h3>
+        <svg viewBox="0 0 780 480" style="width:100%;height:auto;font-family:-apple-system,sans-serif">
+          <defs>
+            <linearGradient id="gradB" x1="100%" y1="0%" x2="0%" y2="0%"><stop offset="0%" stop-color="#e53e3e"/><stop offset="40%" stop-color="#48bb78"/><stop offset="100%" stop-color="#2b6cb0"/></linearGradient>
+            <filter id="shadow2"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.15"/></filter>
+          </defs>
+          <rect x="0" y="0" width="780" height="480" rx="12" fill="#fafcfd"/>
+          <path d="M40,380 Q60,350 100,340 Q140,320 200,350 Q280,340 350,360 Q420,340 500,300 Q580,200 650,150 Q700,120 730,180 Q740,250 720,340 Q680,390 600,420 Q400,460 200,440 Q80,420 40,380Z" fill="#f0f4f8" stroke="#dce4ec" stroke-width="1" stroke-dasharray="6,3"/>
+          <!-- Route path (clockwise = reverse of Plan A) -->
+          <path d="M630,340 Q650,250 650,230 Q660,200 660,100 Q690,150 690,150 Q650,170 560,160 Q500,180 440,270 Q370,280 330,385 Q280,340 230,370 Q200,240 130,290 Q140,310 160,350 Q200,400 260,420 Q320,440 380,430 Q440,400 500,370 Q570,340 630,340Z" fill="none" stroke="url(#gradB)" stroke-width="4" stroke-linecap="round" filter="url(#shadow2)"/>
+          <!-- Stops for Plan B -->
+          <!-- D1: 乌市 -->
+          <circle cx="630" cy="340" r="22" fill="#c53030" stroke="white" stroke-width="3" filter="url(#shadow2)"/><text x="630" y="345" text-anchor="middle" fill="white" font-size="11" font-weight="700">D1</text>
+          <text x="630" y="375" text-anchor="middle" fill="#c53030" font-size="12" font-weight="700">✈️ 乌市抵达</text>
+          <!-- D2: 福海 -->
+          <circle cx="650" cy="230" r="18" fill="#ed8936" stroke="white" stroke-width="3" filter="url(#shadow2)"/><text x="650" y="235" text-anchor="middle" fill="white" font-size="11" font-weight="700">D2</text>
+          <text x="670" y="225" text-anchor="start" fill="#2d3748" font-size="10" font-weight="600">福海·乌伦古湖</text>
+          <!-- D3: 喀纳斯 -->
+          <circle cx="660" cy="100" r="18" fill="#e53e3e" stroke="white" stroke-width="3" filter="url(#shadow2)"/><text x="660" y="105" text-anchor="middle" fill="white" font-size="11" font-weight="700">D3</text>
+          <text x="620" y="88" text-anchor="middle" fill="#2d3748" font-size="10" font-weight="600">喀纳斯</text>
+          <!-- D4: 禾木 -->
+          <circle cx="690" cy="150" r="18" fill="#e53e3e" stroke="white" stroke-width="3" filter="url(#shadow2)"/><text x="690" y="155" text-anchor="middle" fill="white" font-size="11" font-weight="700">D4</text>
+          <text x="710" y="140" text-anchor="start" fill="#2d3748" font-size="10" font-weight="600">禾木</text>
+          <!-- D5: 魔鬼城 -->
+          <circle cx="560" cy="160" r="20" fill="#dd6b20" stroke="white" stroke-width="3" filter="url(#shadow2)"/><text x="560" y="165" text-anchor="middle" fill="white" font-size="11" font-weight="700">D5</text>
+          <text x="530" y="148" text-anchor="middle" fill="#2d3748" font-size="10" font-weight="600">魔鬼城</text>
+          <!-- D6: 奎屯 -->
+          <circle cx="440" cy="270" r="18" fill="#38a169" stroke="white" stroke-width="3" filter="url(#shadow2)"/><text x="440" y="275" text-anchor="middle" fill="white" font-size="11" font-weight="700">D6</text>
+          <text x="400" y="262" text-anchor="middle" fill="#2d3748" font-size="10" font-weight="600">奎屯休整</text>
+          <!-- D7: 独库+那拉提 -->
+          <circle cx="370" cy="340" r="20" fill="#ecc94b" stroke="white" stroke-width="3" filter="url(#shadow2)"/><text x="370" y="345" text-anchor="middle" fill="white" font-size="11" font-weight="700">D7</text>
+          <text x="340" y="335" text-anchor="end" fill="#2d3748" font-size="10" font-weight="600">独库公路</text>
+          <!-- D8: 那拉提 -->
+          <circle cx="330" cy="385" r="18" fill="#38a169" stroke="white" stroke-width="3" filter="url(#shadow2)"/><text x="330" y="390" text-anchor="middle" fill="white" font-size="11" font-weight="700">D8</text>
+          <text x="290" y="398" text-anchor="middle" fill="#2d3748" font-size="10" font-weight="600">那拉提</text>
+          <!-- D9: 喀拉峻 -->
+          <circle cx="230" cy="370" r="18" fill="#38a169" stroke="white" stroke-width="3" filter="url(#shadow2)"/><text x="230" y="375" text-anchor="middle" fill="white" font-size="11" font-weight="700">D9</text>
+          <text x="200" y="360" text-anchor="middle" fill="#2d3748" font-size="10" font-weight="600">喀拉峻</text>
+          <!-- D10: 赛湖+伊宁 -->
+          <circle cx="130" cy="290" r="20" fill="#2b6cb0" stroke="white" stroke-width="3" filter="url(#shadow2)"/><text x="130" y="295" text-anchor="middle" fill="white" font-size="11" font-weight="700">D10</text>
+          <text x="90" y="280" text-anchor="middle" fill="#2b6cb0" font-size="12" font-weight="700">赛湖→伊宁✈️</text>
+          <!-- Legend -->
+          <rect x="20" y="20" width="180" height="70" rx="8" fill="white" stroke="#e2e8f0" stroke-width="1"/>
+          <text x="35" y="40" font-size="10" font-weight="700" fill="#2d3748">🗺️ 顺时针环线</text>
+          <line x1="35" y1="52" x2="65" y2="52" stroke="#e53e3e" stroke-width="3" stroke-linecap="round"/>
+          <text x="72" y="56" font-size="9" fill="#718096">先喀纳斯（北段）</text>
+          <line x1="35" y1="68" x2="65" y2="68" stroke="#2b6cb0" stroke-width="3" stroke-linecap="round"/>
+          <text x="72" y="72" font-size="9" fill="#718096">后草原（南段）</text>
+          <line x1="120" y1="68" x2="150" y2="68" stroke="#ecc94b" stroke-width="3" stroke-linecap="round"/>
+          <text x="157" y="72" font-size="9" fill="#718096">独库</text>
+        </svg>
+      </div>
       <div class="cards-3">
         <div class="stat-card"><div class="label">🚗 车型</div><div class="value">哈弗大狗</div><div class="sub">紧凑SUV · ¥230/天</div></div>
         <div class="stat-card"><div class="label">🏨 住宿</div><div class="value">1间/晚</div><div class="sub">8晚 · ¥2,460</div></div>
@@ -179,6 +289,7 @@
 
     <!-- Plan A Double -->
     <div id="route-double-a" class="route-content active">
+      <div class="card full" style="padding:16px 20px;margin-bottom:16px"><h3>🗺️ 方案A路线图 · 伊宁进→乌市出（逆时针环线）</h3><svg viewBox="0 0 780 480" style="width:100%;height:auto;font-family:-apple-system,sans-serif"><defs><linearGradient id="gradA2" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#2b6cb0"/><stop offset="50%" stop-color="#48bb78"/><stop offset="100%" stop-color="#e53e3e"/></linearGradient><filter id="shadowA2"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.15"/></filter></defs><rect x="0" y="0" width="780" height="480" rx="12" fill="#fafcfd"/><path d="M40,380 Q60,350 100,340 Q140,320 200,350 Q280,340 350,360 Q420,340 500,300 Q580,200 650,150 Q700,120 730,180 Q740,250 720,340 Q680,390 600,420 Q400,460 200,440 Q80,420 40,380Z" fill="#f0f4f8" stroke="#dce4ec" stroke-width="1" stroke-dasharray="6,3"/><path d="M160,350 Q140,310 130,290 Q200,260 200,240 Q240,300 280,340 Q340,320 370,280 Q420,240 460,220 Q500,180 560,160 Q620,130 660,140 Q680,160 670,200 Q660,250 630,280 Q570,340 500,370 Q440,400 380,430 Q320,440 260,420 Q200,400 160,350Z" fill="none" stroke="url(#gradA2)" stroke-width="4" stroke-linecap="round" filter="url(#shadowA2)"/><circle cx="200" cy="140" r="3" fill="#2b6cb0"/><circle cx="280" cy="340" r="3" fill="#3182ce"/><circle cx="370" cy="280" r="3" fill="#38a169"/><circle cx="500" cy="180" r="3" fill="#e53e3e"/><circle cx="660" cy="140" r="3" fill="#e53e3e"/><circle cx="630" cy="280" r="3" fill="#dd6b20"/><circle cx="380" cy="430" r="3" fill="#3182ce"/><circle cx="160" cy="350" r="20" fill="#2b6cb0" stroke="white" stroke-width="3" filter="url(#shadowA2)"/><text x="160" y="355" text-anchor="middle" fill="white" font-size="11" font-weight="700">D1</text><text x="160" y="382" text-anchor="middle" fill="#2d3748" font-size="11" font-weight="600">伊宁</text><circle cx="130" cy="290" r="18" fill="#3182ce" stroke="white" stroke-width="3" filter="url(#shadowA2)"/><text x="130" y="295" text-anchor="middle" fill="white" font-size="11" font-weight="700">D2</text><text x="100" y="275" text-anchor="middle" fill="#2d3748" font-size="10" font-weight="600">赛湖</text><circle cx="230" cy="370" r="18" fill="#38a169" stroke="white" stroke-width="3" filter="url(#shadowA2)"/><text x="230" y="375" text-anchor="middle" fill="white" font-size="11" font-weight="700">D3</text><text x="230" y="402" text-anchor="middle" fill="#2d3748" font-size="10" font-weight="600">喀拉峻</text><circle cx="330" cy="385" r="18" fill="#38a169" stroke="white" stroke-width="3" filter="url(#shadowA2)"/><text x="330" y="390" text-anchor="middle" fill="white" font-size="11" font-weight="700">D4</text><text x="330" y="417" text-anchor="middle" fill="#2d3748" font-size="10" font-weight="600">那拉提</text><circle cx="440" cy="270" r="20" fill="#ecc94b" stroke="white" stroke-width="3" filter="url(#shadowA2)"/><text x="440" y="275" text-anchor="middle" fill="white" font-size="11" font-weight="700">D5</text><text x="440" y="302" text-anchor="middle" fill="#2d3748" font-size="10" font-weight="600">独库+奎屯</text><circle cx="560" cy="160" r="20" fill="#dd6b20" stroke="white" stroke-width="3" filter="url(#shadowA2)"/><text x="560" y="165" text-anchor="middle" fill="white" font-size="11" font-weight="700">D6</text><text x="560" y="192" text-anchor="middle" fill="#2d3748" font-size="10" font-weight="600">魔鬼城→布尔津</text><circle cx="660" cy="100" r="18" fill="#e53e3e" stroke="white" stroke-width="3" filter="url(#shadowA2)"/><text x="660" y="105" text-anchor="middle" fill="white" font-size="11" font-weight="700">D7</text><text x="660" y="132" text-anchor="middle" fill="#2d3748" font-size="10" font-weight="600">喀纳斯</text><circle cx="690" cy="150" r="18" fill="#e53e3e" stroke="white" stroke-width="3" filter="url(#shadowA2)"/><text x="690" y="155" text-anchor="middle" fill="white" font-size="11" font-weight="700">D8</text><text x="710" y="140" text-anchor="start" fill="#2d3748" font-size="10" font-weight="600">禾木</text><circle cx="650" cy="230" r="18" fill="#ed8936" stroke="white" stroke-width="3" filter="url(#shadowA2)"/><text x="650" y="235" text-anchor="middle" fill="white" font-size="11" font-weight="700">D9</text><text x="650" y="262" text-anchor="middle" fill="#2d3748" font-size="10" font-weight="600">福海</text><circle cx="630" cy="340" r="22" fill="#c53030" stroke="white" stroke-width="3" filter="url(#shadowA2)"/><text x="630" y="345" text-anchor="middle" fill="white" font-size="11" font-weight="700">D10</text><text x="630" y="375" text-anchor="middle" fill="#c53030" font-size="12" font-weight="700">✈️ 乌市返京</text><rect x="20" y="20" width="180" height="70" rx="8" fill="white" stroke="#e2e8f0" stroke-width="1"/><text x="35" y="40" font-size="10" font-weight="700" fill="#2d3748">🗺️ 逆时针环线</text><line x1="35" y1="52" x2="65" y2="52" stroke="#2b6cb0" stroke-width="3" stroke-linecap="round"/><text x="72" y="56" font-size="9" fill="#718096">草原段（伊犁）</text><line x1="35" y1="68" x2="65" y2="68" stroke="#e53e3e" stroke-width="3" stroke-linecap="round"/><text x="72" y="72" font-size="9" fill="#718096">喀纳斯段（阿勒泰）</text><line x1="120" y1="68" x2="150" y2="68" stroke="#dd6b20" stroke-width="3" stroke-linecap="round"/><text x="157" y="72" font-size="9" fill="#718096">返程段</text></svg></div>
       <div class="cards-3">
         <div class="stat-card"><div class="label">🚗 车型</div><div class="value">别克GL8</div><div class="sub">7座MPV · ¥420/天</div></div>
         <div class="stat-card"><div class="label">🏨 住宿</div><div class="value">2间/晚</div><div class="sub">8晚 · ¥6,000</div></div>
@@ -206,6 +317,7 @@
 
     <!-- Plan B Double -->
     <div id="route-double-b" class="route-content">
+      <div class="card full" style="padding:16px 20px;margin-bottom:16px"><h3>🗺️ 方案B路线图 · 乌市进→伊宁出（顺时针环线）</h3><svg viewBox="0 0 780 480" style="width:100%;height:auto;font-family:-apple-system,sans-serif"><defs><linearGradient id="gradB2" x1="100%" y1="0%" x2="0%" y2="0%"><stop offset="0%" stop-color="#e53e3e"/><stop offset="40%" stop-color="#48bb78"/><stop offset="100%" stop-color="#2b6cb0"/></linearGradient><filter id="shadowB2"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.15"/></filter></defs><rect x="0" y="0" width="780" height="480" rx="12" fill="#fafcfd"/><path d="M40,380 Q60,350 100,340 Q140,320 200,350 Q280,340 350,360 Q420,340 500,300 Q580,200 650,150 Q700,120 730,180 Q740,250 720,340 Q680,390 600,420 Q400,460 200,440 Q80,420 40,380Z" fill="#f0f4f8" stroke="#dce4ec" stroke-width="1" stroke-dasharray="6,3"/><path d="M630,340 Q650,250 650,230 Q660,200 660,100 Q690,150 690,150 Q650,170 560,160 Q500,180 440,270 Q370,280 330,385 Q280,340 230,370 Q200,240 130,290 Q140,310 160,350 Q200,400 260,420 Q320,440 380,430 Q440,400 500,370 Q570,340 630,340Z" fill="none" stroke="url(#gradB2)" stroke-width="4" stroke-linecap="round" filter="url(#shadowB2)"/><circle cx="630" cy="340" r="22" fill="#c53030" stroke="white" stroke-width="3" filter="url(#shadowB2)"/><text x="630" y="345" text-anchor="middle" fill="white" font-size="11" font-weight="700">D1</text><text x="630" y="375" text-anchor="middle" fill="#c53030" font-size="12" font-weight="700">✈️ 乌市抵达</text><circle cx="650" cy="230" r="18" fill="#ed8936" stroke="white" stroke-width="3" filter="url(#shadowB2)"/><text x="650" y="235" text-anchor="middle" fill="white" font-size="11" font-weight="700">D2</text><text x="670" y="225" text-anchor="start" fill="#2d3748" font-size="10" font-weight="600">福海</text><circle cx="660" cy="100" r="18" fill="#e53e3e" stroke="white" stroke-width="3" filter="url(#shadowB2)"/><text x="660" y="105" text-anchor="middle" fill="white" font-size="11" font-weight="700">D3</text><text x="620" y="88" text-anchor="middle" fill="#2d3748" font-size="10" font-weight="600">喀纳斯</text><circle cx="690" cy="150" r="18" fill="#e53e3e" stroke="white" stroke-width="3" filter="url(#shadowB2)"/><text x="690" y="155" text-anchor="middle" fill="white" font-size="11" font-weight="700">D4</text><text x="710" y="140" text-anchor="start" fill="#2d3748" font-size="10" font-weight="600">禾木</text><circle cx="560" cy="160" r="20" fill="#dd6b20" stroke="white" stroke-width="3" filter="url(#shadowB2)"/><text x="560" y="165" text-anchor="middle" fill="white" font-size="11" font-weight="700">D5</text><text x="530" y="148" text-anchor="middle" fill="#2d3748" font-size="10" font-weight="600">魔鬼城</text><circle cx="440" cy="270" r="18" fill="#38a169" stroke="white" stroke-width="3" filter="url(#shadowB2)"/><text x="440" y="275" text-anchor="middle" fill="white" font-size="11" font-weight="700">D6</text><text x="400" y="262" text-anchor="middle" fill="#2d3748" font-size="10" font-weight="600">奎屯休整</text><circle cx="370" cy="340" r="20" fill="#ecc94b" stroke="white" stroke-width="3" filter="url(#shadowB2)"/><text x="370" y="345" text-anchor="middle" fill="white" font-size="11" font-weight="700">D7</text><text x="340" y="335" text-anchor="end" fill="#2d3748" font-size="10" font-weight="600">独库</text><circle cx="330" cy="385" r="18" fill="#38a169" stroke="white" stroke-width="3" filter="url(#shadowB2)"/><text x="330" y="390" text-anchor="middle" fill="white" font-size="11" font-weight="700">D8</text><text x="290" y="398" text-anchor="middle" fill="#2d3748" font-size="10" font-weight="600">那拉提</text><circle cx="230" cy="370" r="18" fill="#38a169" stroke="white" stroke-width="3" filter="url(#shadowB2)"/><text x="230" y="375" text-anchor="middle" fill="white" font-size="11" font-weight="700">D9</text><text x="200" y="360" text-anchor="middle" fill="#2d3748" font-size="10" font-weight="600">喀拉峻</text><circle cx="130" cy="290" r="20" fill="#2b6cb0" stroke="white" stroke-width="3" filter="url(#shadowB2)"/><text x="130" y="295" text-anchor="middle" fill="white" font-size="11" font-weight="700">D10</text><text x="90" y="280" text-anchor="middle" fill="#2b6cb0" font-size="12" font-weight="700">赛湖→伊宁✈️</text><rect x="20" y="20" width="180" height="70" rx="8" fill="white" stroke="#e2e8f0" stroke-width="1"/><text x="35" y="40" font-size="10" font-weight="700" fill="#2d3748">🗺️ 顺时针环线</text><line x1="35" y1="52" x2="65" y2="52" stroke="#e53e3e" stroke-width="3" stroke-linecap="round"/><text x="72" y="56" font-size="9" fill="#718096">先喀纳斯（北段）</text><line x1="35" y1="68" x2="65" y2="68" stroke="#2b6cb0" stroke-width="3" stroke-linecap="round"/><text x="72" y="72" font-size="9" fill="#718096">后草原（南段）</text><line x1="120" y1="68" x2="150" y2="68" stroke="#ecc94b" stroke-width="3" stroke-linecap="round"/><text x="157" y="72" font-size="9" fill="#718096">独库</text></svg></div>
       <div class="cards-3">
         <div class="stat-card"><div class="label">🚗 车型</div><div class="value">别克GL8</div><div class="sub">7座MPV · ¥420/天</div></div>
         <div class="stat-card"><div class="label">🏨 住宿</div><div class="value">2间/晚</div><div class="sub">8晚 · ¥6,000</div></div>
@@ -324,6 +436,7 @@
         <tr><td>07/03 13:07</td><td>乌鲁木齐→北京</td><td>¥750-1,000</td><td><span class="tag good">🟢 已达标</span></td><td>10+班/天</td></tr>
         <tr><td>07/03 13:07</td><td>北京→阿勒泰</td><td>¥1,900-2,100</td><td><span class="tag high">❌ 放弃</span></td><td>旺季贵</td></tr>
         <tr><td>2026-07-03 15:29</td><td>v3.0 双路线方案AB · 单/双家庭×伊宁进/乌市进</td></tr>
+    <tr><td>2026-07-03 15:35</td><td>v3.1 🗺️ 小红书环线地图 ×4</td></tr>
     <!-- LOG_INSERT -->
       </tbody>
     </table>
